@@ -23,6 +23,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         public DateTime DateBought { get; set; }
         public DateTime? DateSold { get; set; }
 
+        //After the sale is confirmed add the hold days to OverallStats
+
         public decimal BuyPrice { get; set; }
         public decimal? SellPrice { get; set; }
 
