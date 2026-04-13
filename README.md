@@ -99,16 +99,19 @@ Stats can be fully recomputed from Entries at any time.
 Entry → transaction
 SkinInfo → item data
 Stats → analytics layer
+
 ⚙️ Technologies Used
 .NET (C#)
 Entity Framework Core (Code First)
 SQL Server (or any EF Core provider)
 LINQ for analytics computation
+
 📦 EF Core Setup
 Add Migration
 dotnet ef migrations add InitialCreate
 Update Database
 dotnet ef database update
+
 📊 Key Metrics Explained
 ROI (Return on Investment)
 ROI = TotalProfit / BuyVolume
@@ -116,20 +119,22 @@ Daily Return
 DailyReturn = TotalProfit / TotalHoldDays
 Volume
 Volume = BuyVolume + SellVolume
+
 🔁 Data Flow
 Entry (Trade)
    ↓
 DailyStats (per day aggregation)
    ↓
 OverallStats (global aggregation)
+
 🚧 Future Improvements
 Unrealized profit tracking
 Price history integration (Steam market API)
 Advanced analytics (win rate, volatility)
 UI dashboard (Blazor / React)
 Authentication system (users & portfolios)
-🧠 Learning Focus
 
+🧠 Learning Focus
 This project demonstrates:
 
 EF Core relationships (1:1, 1:n)
@@ -137,8 +142,8 @@ Database normalization vs analytics tradeoffs
 Financial metric modeling
 Aggregation design patterns
 Clean architecture thinking
-📌 Notes
 
+📌 Notes
 This system prioritizes:
 
 ✔ correctness of financial logic
