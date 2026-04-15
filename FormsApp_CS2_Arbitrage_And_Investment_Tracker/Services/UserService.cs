@@ -16,7 +16,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         {
             this.context = Common.Common._context;
         }
-        public async void CreateUser(string username,string email ,string password)
+        public async Task CreateUser(string username,string email ,string password)
         {
             //check if a user with the same username exists
             if(await context.Users.AnyAsync(u => u.Username == username))
@@ -28,19 +28,19 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 
             //add the user to the database
             User user = new User(username,email,passwordHash);
-            context.Users.Add(user);
+            await context.Users.AddAsync(user);
             await context.SaveChangesAsync();
             MessageBox.Show("Succesffull registration");
         }
         public async Task<bool> LoginUser(string username,string password)
         {
-            if (!await context.Users.AnyAsync(u => u.Username == username))
+            //get the user
+            User? user = await context.Users.FirstOrDefaultAsync(x => x.Username == username);
+            if (user is null)
             {
                 MessageBox.Show("The user doesn't exist.");
                 return false;
             }
-            //get the user
-            User user = context.Users.First(x => x.Username == username);
             //get the hashed password and verify it
             string hashedPassword = user.PasswordHash;
             bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
