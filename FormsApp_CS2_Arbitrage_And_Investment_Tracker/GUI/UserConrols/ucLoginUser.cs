@@ -21,7 +21,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
 
         }
 
-        private void loginBtn_Click(object sender, EventArgs e)
+        private async void loginBtn_Click(object sender, EventArgs e)
         {
             //create the UserService and login the user
             UserService userService = new UserService(Common.Common._context);
@@ -29,9 +29,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
             string username = textBox1.Text;
             string passwordHash = textBox2.Text;
 
-            userService.LoginUser(username, passwordHash);
+            bool succesfullLogin = await userService.LoginUser(username, passwordHash);
 
-            if (this.ParentForm is Form1 mainForm)
+            if (this.ParentForm is Form1 mainForm && succesfullLogin)
             {
                 mainForm.LoginSuccessful();   // Switch to main app
             }
@@ -44,6 +44,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
             {
                 mainForm.LoadUserControl(new ucCreateUser());
             }
+        }
+
+        private void ucLoginUser_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

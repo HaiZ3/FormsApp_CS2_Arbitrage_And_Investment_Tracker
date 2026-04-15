@@ -32,11 +32,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             await context.SaveChangesAsync();
             MessageBox.Show("Succesffull registration");
         }
-        public async void LoginUser(string username,string password)
+        public async Task<bool> LoginUser(string username,string password)
         {
             if (!await context.Users.AnyAsync(u => u.Username == username))
             {
                 MessageBox.Show("The user doesn't exist.");
+                return false;
             }
             //get the user
             User user = context.Users.First(x => x.Username == username);
@@ -46,7 +47,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             if(!isPasswordCorrect)
             {
                 MessageBox.Show("Wrong password try again!");
+                return false;
             }
+            return true;
         }
     }
 }
