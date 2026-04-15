@@ -13,6 +13,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         [Key]
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string MarketHashName { get; set; } = string.Empty;
         public float? ItemFloat { get; set; }
         public ItemType ItemType { get; set; }
         public SkinCondition SkinCondition { get; set; }

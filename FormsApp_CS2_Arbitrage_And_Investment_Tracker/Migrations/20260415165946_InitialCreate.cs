@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreation : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,9 +18,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TotalDailyInvested = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    TotalDailyProfit = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    TotalDailyVolume = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    TotalDailyInvested = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
+                    TotalDailyProfit = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
+                    TotalDailyVolume = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
                     TradeCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -34,9 +34,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuyVolume = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    SellVolume = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    TotalProfit = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    BuyVolume = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
+                    SellVolume = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
+                    TotalProfit = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
                     TradeCount = table.Column<int>(type: "int", nullable: false),
                     TotalHoldDays = table.Column<int>(type: "int", nullable: false),
                     LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -96,10 +96,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    DateBought = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataSource = table.Column<int>(type: "int", nullable: false),
+                    DateBought = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateSold = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    BuyPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    SellPrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BuyPrice = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
+                    SellPrice = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: true),
                     SheetId = table.Column<int>(type: "int", nullable: false),
                     SkinInfoId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -121,6 +123,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MarketHashName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ItemFloat = table.Column<float>(type: "real", nullable: true),
                     ItemType = table.Column<int>(type: "int", nullable: false),
                     SkinCondition = table.Column<int>(type: "int", nullable: false),
@@ -139,9 +142,29 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Entries_DateBought",
+                table: "Entries",
+                column: "DateBought");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Entries_DateSold",
+                table: "Entries",
+                column: "DateSold");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Entries_SheetId",
                 table: "Entries",
                 column: "SheetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Entries_Status",
+                table: "Entries",
+                column: "Status");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Entries_Status_DateSold",
+                table: "Entries",
+                columns: new[] { "Status", "DateSold" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sheets_UserId",
@@ -152,6 +175,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                 name: "IX_SkinInfos_EntryId",
                 table: "SkinInfos",
                 column: "EntryId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Username",
+                table: "Users",
+                column: "Username",
                 unique: true);
         }
 

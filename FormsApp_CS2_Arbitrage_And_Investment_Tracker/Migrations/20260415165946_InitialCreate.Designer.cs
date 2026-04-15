@@ -4,6 +4,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
 {
     [DbContext(typeof(CS2TrackerContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20260415165946_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,16 +37,16 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TotalDailyInvested")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<decimal>("TotalDailyProfit")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<decimal>("TotalDailyVolume")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<int>("TradeCount")
                         .HasColumnType("int");
@@ -62,10 +65,16 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("BuyPrice")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
-                    b.Property<DateTime>("DateBought")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DataSource")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DateBought")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateSold")
@@ -80,8 +89,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal?>("SellPrice")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<int>("SheetId")
                         .HasColumnType("int");
@@ -94,7 +103,15 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DateBought");
+
+                    b.HasIndex("DateSold");
+
                     b.HasIndex("SheetId");
+
+                    b.HasIndex("Status");
+
+                    b.HasIndex("Status", "DateSold");
 
                     b.ToTable("Entries");
                 });
@@ -108,8 +125,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("BuyVolume")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -118,15 +135,15 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("SellVolume")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<int>("TotalHoldDays")
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalProfit")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<int>("TradeCount")
                         .HasColumnType("int");
@@ -184,6 +201,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                     b.Property<int>("ItemType")
                         .HasColumnType("int");
 
+                    b.Property<string>("MarketHashName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -231,6 +252,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
