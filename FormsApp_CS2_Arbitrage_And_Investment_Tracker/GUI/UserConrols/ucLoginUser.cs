@@ -1,4 +1,6 @@
-﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
+﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +13,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
 {
     public partial class ucLoginUser : UserControl
     {
-        public ucLoginUser()
+        private CS2TrackerContext _context;
+        public ucLoginUser(CS2TrackerContext context)
         {
             InitializeComponent();
+            _context = context;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -24,16 +28,21 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
         private async void loginBtn_Click(object sender, EventArgs e)
         {
             //create the UserService and login the user
-            UserService userService = new UserService(Common.Common._context);
+            UserService userService = new UserService(_context);
 
             string username = textBox1.Text;
             string passwordHash = textBox2.Text;
 
-            bool succesfullLogin = await userService.LoginUser(username, passwordHash);
+            ServiceResult succesfullLogin = await userService.LoginUser(username, passwordHash);
 
-            if (this.ParentForm is Form1 mainForm && succesfullLogin)
+            if (this.ParentForm is Form1 mainForm && succesfullLogin.Success == true)
             {
+                MessageBox.Show("Succesfful Login!");
                 mainForm.LoginSuccessful();   // Switch to main app
+            }
+            else
+            {
+                MessageBox.Show(succesfullLogin.ErrorMessage);
             }
         }
 
@@ -42,7 +51,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
             // Get reference to parent Form1 and load Create Account screen
             if (this.ParentForm is Form1 mainForm)
             {
-                mainForm.LoadUserControl(new ucCreateUser());
+                mainForm.LoadUserControl(new ucCreateUser(_context));
             }
         }
 

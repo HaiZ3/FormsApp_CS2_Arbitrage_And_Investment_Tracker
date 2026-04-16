@@ -1,27 +1,29 @@
 ﻿using BCrypt.Net;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Common;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         CS2TrackerContext context;
         public UserService(CS2TrackerContext context)
         {
-            this.context = Common.Common._context;
+            this.context = context;
         }
-        public async Task CreateUser(string username,string email ,string password)
+        public async Task<ServiceResult> CreateUser(string username,string email ,string password)
         {
             //check if a user with the same username exists
             if(await context.Users.AnyAsync(u => u.Username == username))
             {
-                MessageBox.Show("The username already exists!");
+                return ServiceResult.Fail("The username already exists");
             }   
             //hash the password with BCrypt
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(password, 12);
@@ -30,26 +32,25 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             User user = new User(username,email,passwordHash);
             await context.Users.AddAsync(user);
             await context.SaveChangesAsync();
-            MessageBox.Show("Succesffull registration");
+
+            return ServiceResult.Ok();
         }
-        public async Task<bool> LoginUser(string username,string password)
+        public async Task<ServiceResult> LoginUser(string username,string password)
         {
             //get the user
             User? user = await context.Users.FirstOrDefaultAsync(x => x.Username == username);
             if (user is null)
             {
-                MessageBox.Show("The user doesn't exist.");
-                return false;
+                return ServiceResult.Fail("Such a user does not exist!");
             }
             //get the hashed password and verify it
             string hashedPassword = user.PasswordHash;
             bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
             if(!isPasswordCorrect)
             {
-                MessageBox.Show("Wrong password try again!");
-                return false;
+                return ServiceResult.Fail("Incorrect password!");
             }
-            return true;
+            return ServiceResult.Ok();
         }
     }
 }
