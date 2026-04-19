@@ -14,5 +14,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
         {
             InitializeComponent();
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

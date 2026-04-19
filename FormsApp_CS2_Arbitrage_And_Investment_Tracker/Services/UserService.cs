@@ -4,6 +4,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Session;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,15 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 {
     public class UserService : IUserService
     {
-        CS2TrackerContext context;
+        CS2TrackerContext _context;
         public UserService(CS2TrackerContext context)
         {
-            this.context = context;
+            this._context = context;
         }
         public async Task<ServiceResult> CreateUser(string username,string email ,string password)
         {
             //check if a user with the same username exists
-            if(await context.Users.AnyAsync(u => u.Username == username))
+            if(await _context.Users.AnyAsync(u => u.Username == username))
             {
                 return ServiceResult.Fail("The username already exists");
             }   
@@ -30,15 +31,16 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 
             //add the user to the database
             User user = new User(username,email,passwordHash);
-            await context.Users.AddAsync(user);
-            await context.SaveChangesAsync();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
 
             return ServiceResult.Ok();
         }
+
         public async Task<ServiceResult> LoginUser(string username,string password)
         {
             //get the user
-            User? user = await context.Users.FirstOrDefaultAsync(x => x.Username == username);
+            User? user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
             if (user is null)
             {
                 return ServiceResult.Fail("Such a user does not exist!");
@@ -50,6 +52,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             {
                 return ServiceResult.Fail("Incorrect password!");
             }
+            //Add the user info to the session
+            UserSession.Login(user.Id, user.Username);
             return ServiceResult.Ok();
         }
     }

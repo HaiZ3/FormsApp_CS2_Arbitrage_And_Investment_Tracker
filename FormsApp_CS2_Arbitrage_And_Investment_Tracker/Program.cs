@@ -40,7 +40,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
             ServiceProvider = services.BuildServiceProvider();
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1(new CS2TrackerContext()));
+            Application.Run(new Form1(new CS2TrackerContext(connectionString)));
         }
     }
 }
