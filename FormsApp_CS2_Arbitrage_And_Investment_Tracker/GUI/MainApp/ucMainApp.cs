@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Session;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,14 +13,60 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 {
     public partial class ucMainApp : UserControl
     {
-        public ucMainApp()
+        private CS2TrackerContext _context;
+        public ucMainApp(CS2TrackerContext context)
         {
             InitializeComponent();
+            comboBox1.DataSource = context.Sheets.Where(s => s.UserId == UserSession.UserId).ToList();
+            comboBox1.DisplayMember = "Name";
+            comboBox1.ValueMember = "Id";
+            StyleDataGridView(dataGridView1);
+            _context = context;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            if (this.ParentForm is Form1 mainForm)
+            {
+                mainForm.LoadUserControl(new ucCreateSheet(_context));
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void StyleDataGridView(DataGridView dgv)
+        {
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.BackgroundColor = Color.FromArgb(30, 30, 30);
+            dgv.EnableHeadersVisualStyles = false;
+
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(45, 45, 45);
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgv.ColumnHeadersHeight = 40;
+
+            dgv.DefaultCellStyle.BackColor = Color.FromArgb(37, 37, 38);
+            dgv.DefaultCellStyle.ForeColor = Color.White;
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 122, 204);
+            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+
+            dgv.RowHeadersVisible = false;
+            dgv.RowTemplate.Height = 35;
+
+            dgv.GridColor = Color.FromArgb(50, 50, 50);
+
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
         }
     }
 }

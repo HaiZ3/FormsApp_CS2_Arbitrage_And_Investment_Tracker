@@ -38,7 +38,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
             if (this.ParentForm is Form1 mainForm && succesfullLogin.Success == true)
             {
                 MessageBox.Show("Succesfful Login!");
-                mainForm.LoginSuccessful();   // Switch to main app
+                mainForm.LoginSuccessful(_context);   // Switch to main app
             }
             else
             {

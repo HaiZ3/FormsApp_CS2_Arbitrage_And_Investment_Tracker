@@ -10,32 +10,32 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 {
     public class SheetService : ISheetService
     {
-        public CS2TrackerContext _context { get; set; }
+        private CS2TrackerContext _context { get; set; }
         public SheetService(CS2TrackerContext context)
         {
             _context = context;
         }
-        public async Task<ServiceResult> CreateSheet(User user, string name, SheetType sheetType)
+        public async Task<ServiceResult> CreateSheet(int userId, string name, SheetType sheetType)
         {
-            Sheet sheet = new Sheet(user, name, sheetType);
-            try
-            {
-                if (name.IsNullOrEmpty())
-                {
-                    throw new Exception();
-                }
-                await _context.Sheets.AddAsync(sheet);
-                await _context.SaveChangesAsync();
-                return ServiceResult.Ok();
-            }
-            catch (Exception)
+            Sheet sheet = new Sheet(userId, name, sheetType);
+
+            if (name.IsNullOrEmpty())
             {
                 return ServiceResult.Fail("Failed to add the sheet to the database!");
             }
+            await _context.Sheets.AddAsync(sheet);
+            await _context.SaveChangesAsync();
+            return ServiceResult.Ok();
         }
-        public Task<ServiceResultGeneric<ICollection<Sheet>>> LoadSheets()
+        
+        public async Task<ServiceResultGeneric<ICollection<Sheet>>> LoadSheets(int sheetId)
         {
-            throw new NotImplementedException();
+            ICollection<Sheet>? sheets = _context.Sheets.ToArray();
+            if(sheets is null)
+            {
+                return ServiceResultGeneric<ICollection<Sheet>>.Fail("Failed to load the sheets or there are no existing sheets!");
+            }
+            return ServiceResultGeneric<ICollection<Sheet>>.Ok(sheets);
         }
     }
 }

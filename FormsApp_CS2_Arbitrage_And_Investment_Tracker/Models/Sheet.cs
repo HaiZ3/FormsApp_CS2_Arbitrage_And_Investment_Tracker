@@ -15,9 +15,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         {
             
         }
-        public Sheet(User user, string name, SheetType sheetType)
+        public Sheet(int userId, string name, SheetType sheetType)
         {
-            this.User = user;
+            this.UserId = userId;
             this.Name = name;
             this.SheetType = sheetType;
             CreatedAt = DateTime.Now.ToUniversalTime();

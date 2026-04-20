@@ -31,9 +31,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
         }
 
         // Called from ucLogin when login is successful
-        public void LoginSuccessful()
+        public void LoginSuccessful(CS2TrackerContext context)
         {
-            LoadUserControl(new ucMainApp());   // Load your main application
+            LoadUserControl(new ucMainApp(context));   // Load your main application
         }
     }
 }

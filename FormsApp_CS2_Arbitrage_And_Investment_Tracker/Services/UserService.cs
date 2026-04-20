@@ -14,7 +14,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 {
     public class UserService : IUserService
     {
-        CS2TrackerContext _context;
+        private CS2TrackerContext _context;
         public UserService(CS2TrackerContext context)
         {
             this._context = context;
