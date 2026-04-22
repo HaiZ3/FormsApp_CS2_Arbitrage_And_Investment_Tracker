@@ -9,30 +9,24 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
 {
     internal static class Program
     {
-        public static IConfiguration Configuration { get; private set; }
         public static IServiceProvider ServiceProvider { get; private set; }
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+
         [STAThread]
         static void Main()
         {
-            //load configurtation
-            Configuration = new ConfigurationBuilder()
-             .SetBasePath(AppContext.BaseDirectory)
-             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-             .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
-             .Build();
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false)
+                .AddJsonFile("appsettings.Development.json", optional: true)
+                .Build();
 
-            // Setup DI Container
             var services = new ServiceCollection();
 
-            // Register DbContext
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            var connectionString = config.GetConnectionString("DefaultConnection");
+
             services.AddDbContext<CS2TrackerContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            // Register Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEntryService, EntryService>();
             services.AddScoped<ISheetService, SheetService>();
@@ -40,7 +34,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
             ServiceProvider = services.BuildServiceProvider();
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1(new CS2TrackerContext(connectionString)));
+
+            var db = ServiceProvider.GetRequiredService<CS2TrackerContext>();
+            var form = new Form1(db);
+
+            Application.Run(form);
         }
     }
 }

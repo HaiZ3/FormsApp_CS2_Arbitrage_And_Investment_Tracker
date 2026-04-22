@@ -1,5 +1,8 @@
-﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Session;
 using System;
 using System.Collections.Generic;
@@ -14,14 +17,17 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
     public partial class ucMainApp : UserControl
     {
         private CS2TrackerContext _context;
+        private SheetService _sheetService;
         public ucMainApp(CS2TrackerContext context)
         {
             InitializeComponent();
-            comboBox1.DataSource = context.Sheets.Where(s => s.UserId == UserSession.UserId).ToList();
+            _context = context;
+            SheetService sheetService = new(_context);
+            var sheetLoader = sheetService.LoadSheets(UserSession.UserId);
+            comboBox1.DataSource = sheetLoader.Result.Data;
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "Id";
             StyleDataGridView(dataGridView1);
-            _context = context;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -39,7 +45,16 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int sheetId = (int)comboBox1.SelectedValue;
 
+            var result = _sheetService.GetSheetById(sheetId).Result;
+            if(result.Success == false)
+            {
+                MessageBox.Show(result.ErrorMessage);
+                return;
+            }
+
+            dataGridView1.DataSource = result.Data;
         }
         private void StyleDataGridView(DataGridView dgv)
         {

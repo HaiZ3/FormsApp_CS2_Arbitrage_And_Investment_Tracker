@@ -1,4 +1,5 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,15 +11,38 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
     [Table("SkinInfos")]
     public class SkinInfo
     {
+        public SkinInfo()
+        {
+            
+        }
+        public SkinInfo(string name,float? itemFloat,SkinVariant skinVariant
+            ,SkinCondition skinCondition)
+        {
+            this.Name = name;
+            ItemFloat = itemFloat;
+            SkinVariant = skinVariant;
+            SkinCondition = skinCondition;
+        }
         [Key]
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string MarketHashName { get; set; } = string.Empty;
         public float? ItemFloat { get; set; }
-        public ItemType ItemType { get; set; }
-        public SkinCondition SkinCondition { get; set; }
-        public SkinVariant SkinVariant { get; set; }
+        public ItemType? ItemType { get; set; }
+        public SkinCondition? SkinCondition { get; set; }
+        public SkinVariant? SkinVariant { get; set; }
         public int EntryId { get; set; }
         public Entry Entry { get; set; }
+
+        public void GetItemType()
+        {
+            string baseName = Name;
+            if (Name.Contains("|"))
+            {
+                baseName = Name.Split('|')[0].Trim();
+            }
+
+            ItemType = Cs2ItemTypeHelper.GetItemType(baseName);
+        }
     }
 }

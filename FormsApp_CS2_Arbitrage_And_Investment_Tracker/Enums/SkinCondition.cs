@@ -6,7 +6,6 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums
 {
     public enum SkinCondition
     { 
-        Not_Applicable = 0,
         Factory_New = 1,
         Minimal_Wear = 2,
         Field_Tested = 3,
