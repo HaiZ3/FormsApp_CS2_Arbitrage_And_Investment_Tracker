@@ -4,6 +4,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
 {
     [DbContext(typeof(CS2TrackerContext))]
-    partial class CS2TrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20260428170239_ItemFloatChangedToDecimal")]
+    partial class ItemFloatChangedToDecimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

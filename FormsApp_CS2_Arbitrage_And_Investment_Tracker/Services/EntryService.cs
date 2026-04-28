@@ -17,14 +17,21 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             _context = context;
         }
 
-        public Task<ServiceResult> AddEntry(int sheetId, string entryName, int quantity
-            , DateTime dateBought, DateTime dateSold, decimal buyPrice, float? itemFloat
-            , SkinCondition skinCondition, SkinVariant skinVariant)
+        public async Task<ServiceResult> AddEntry(int sheetId, string entryName, int quantity
+            , DateTime dateBought, DateTime? dateSold, decimal buyPrice,decimal? sellPrice, decimal? itemFloat
+            , SkinCondition? skinCondition, SkinVariant skinVariant)
         {
-            SkinInfo skinInfo = new SkinInfo();
-            skinInfo.Name = entryName;
+            SkinInfo skinInfo = new SkinInfo(entryName,itemFloat,skinVariant
+                ,skinCondition);
+            skinInfo.GetItemType();
 
-            return null;
+            Entry entry = new Entry(quantity,dateBought,dateSold,buyPrice,sellPrice,sheetId,skinInfo);
+            entry.DataSource = EntryDataSource.Regular;
+
+            _context.Add(entry);
+            _context.SaveChanges();
+
+            return ServiceResult.Ok();
         }
     }
 }

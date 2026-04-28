@@ -17,6 +17,25 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
     [Index(nameof(Status), nameof(DateSold))]
     public class Entry
     {
+        public Entry()
+        {
+            
+        }
+        public Entry(int quantity,DateTime dateBought
+            ,DateTime? dateSold,decimal buyPrice,decimal? sellPrice
+            ,int sheetId,SkinInfo skinInfo)
+        {
+            Name = skinInfo.Name;
+            Quantity = quantity;
+            DateBought = dateBought;
+            DateSold = dateSold;
+            BuyPrice = buyPrice;
+            SellPrice = sellPrice;
+            SkinInfo = skinInfo;
+            SheetId = sheetId;
+            Status = EntryStatus.Open;
+            CreatedAt = DateTime.UtcNow;
+        }
         [Key]
         public int Id { get; set; }
 
@@ -24,7 +43,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         public string Name { get; set; } = string.Empty;
 
         public int Quantity { get; set; } = 1;
-        public EntryStatus Status { get; set; }
+        public EntryStatus Status { get; set; } 
 
         public EntryDataSource DataSource { get; set; }
 

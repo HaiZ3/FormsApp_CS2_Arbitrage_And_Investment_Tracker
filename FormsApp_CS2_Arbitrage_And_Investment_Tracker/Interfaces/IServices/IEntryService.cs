@@ -8,8 +8,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices
 {
     public interface IEntryService
     {
-        public Task<ServiceResult> AddEntry(int sheetId,string entryName,int quantity
-            ,DateTime dateBought,DateTime dateSold,decimal buyPrice,float? itemFloat
-            ,SkinCondition skinCondition,SkinVariant skinVariant);
+        public Task<ServiceResult> AddEntry(int sheetId, string entryName, int quantity
+            , DateTime dateBought, DateTime? dateSold, decimal buyPrice, decimal? sellPrice, decimal? itemFloat
+            , SkinCondition? skinCondition, SkinVariant skinVariant);
     }
 }
