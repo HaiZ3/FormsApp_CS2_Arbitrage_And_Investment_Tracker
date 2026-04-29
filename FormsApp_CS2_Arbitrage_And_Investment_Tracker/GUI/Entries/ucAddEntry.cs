@@ -1,8 +1,10 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Session;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +17,13 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
 {
     public partial class ucAddEntry : UserControl
     {
-        CS2TrackerContext _context;
-        public ucAddEntry(CS2TrackerContext context)
+        ISheetService _sheetService;
+        IEntryService _entryService;
+        public ucAddEntry(IEntryService entryService,ISheetService sheetService)
         {
-            _context = context;
+            _entryService = entryService;
+            _sheetService = sheetService;
+
             InitializeComponent();
             comboBox1.DataSource = Enum.GetValues(typeof(SkinCondition))
                 .Cast<SkinCondition>()
@@ -44,6 +49,17 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             numericUpDown2.DecimalPlaces = 10;
             numericUpDown2.Increment = 0.0000000001M;
 
+
+            numericUpDown3.Minimum = 0;
+            numericUpDown3.Maximum = 1000000;
+            numericUpDown3.DecimalPlaces = 2;
+            numericUpDown3.Increment = 0.01M;
+
+            var sheetLoader = _sheetService.LoadSheets(UserSession.UserId);
+            comboBox3.DataSource = sheetLoader.Result.Data;
+            comboBox3.DisplayMember = "Name";
+            comboBox3.ValueMember = "Id";
+
             //SkinCondition? skinCondition = (SkinCondition?)comboBox1.SelectedValue;
         }
 
@@ -61,17 +77,35 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
         {
             string name = textBox1.Text;
             decimal? itemFloat = (decimal)numericUpDown2.Value;
-            if(itemFloat == 0)
+
+            if (itemFloat == 0)
             {
                 itemFloat = null;
             }
-            SkinCondition? skinCondition = (SkinCondition?)comboBox1.SelectedItem;
-            SkinVariant skinVariant = (SkinVariant)comboBox2.SelectedItem;
+
+            SkinCondition? skinCondition = (SkinCondition?)comboBox1.SelectedValue;
+            SkinVariant skinVariant = (SkinVariant)comboBox2.SelectedValue;
             DateTime buyTime = (DateTime)dateTimePicker1.Value;
             int quantity = (int)numericUpDown1.Value;
-            EntryService entryService = new EntryService(_context);
-            ServiceResult res = entryService.AddEntry();
-            //Add the sheet id and we are nearly done with adding a new entry
+            int sheetId = (int)comboBox3.SelectedValue;
+            decimal buyPrice = numericUpDown3.Value;
+
+            var res = _entryService.AddEntry(sheetId,name,quantity
+                ,buyTime,null,buyPrice,null,itemFloat,skinCondition,skinVariant);
+
+            if(res.Result.Success == false)
+            {
+                MessageBox.Show(res.Result.ErrorMessage);
+            }
+            else
+            {
+                MessageBox.Show("Entry added successfully!");
+            }
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

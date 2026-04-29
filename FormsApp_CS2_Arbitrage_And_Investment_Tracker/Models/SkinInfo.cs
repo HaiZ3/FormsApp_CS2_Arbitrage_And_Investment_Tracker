@@ -15,10 +15,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
     {
         public SkinInfo()
         {
-            
+
         }
-        public SkinInfo(string name,decimal? itemFloat,SkinVariant skinVariant
-            ,SkinCondition? skinCondition)
+        public SkinInfo(string name, decimal? itemFloat, SkinVariant skinVariant
+            , SkinCondition? skinCondition)
         {
             this.Name = name;
             ItemFloat = itemFloat;
@@ -29,16 +29,16 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string MarketHashName { get; set; } = string.Empty;
-        public decimal? ItemFloat 
-        { 
-            get; 
+        public decimal? ItemFloat
+        {
+            get;
             set
             {
-                if(value >= 1m)
+                if (value >= 1m)
                 {
                     throw new Exception("The float is higher or equal to 1");
                 }
-            } 
+            }
         }
         public ItemType? ItemType { get; set; }
         public SkinCondition? SkinCondition { get; set; }
@@ -46,9 +46,13 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         public int EntryId { get; set; }
         public Entry Entry { get; set; }
 
-        public void GetItemType()
+        public void SetItemType()
         {
             ItemType = Cs2ItemTypeHelper.GetItemType(Name);
+        }
+        public void SetMarketHashName()
+        {
+            MarketHashName = Cs2MarketHashNameHelper.GetMarketHashName(this);
         }
     }
 }

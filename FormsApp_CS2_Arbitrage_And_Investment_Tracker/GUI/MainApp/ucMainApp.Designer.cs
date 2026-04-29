@@ -33,21 +33,23 @@
             button3 = new Button();
             dataGridView1 = new DataGridView();
             comboBox1 = new ComboBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(403, 563);
+            label1.Font = new Font("Segoe UI", 13F);
+            label1.Location = new Point(403, 23);
             label1.Name = "label1";
-            label1.Size = new Size(59, 15);
+            label1.Size = new Size(90, 25);
             label1.TabIndex = 0;
             label1.Text = "Main App";
             // 
             // button2
             // 
-            button2.Location = new Point(446, 497);
+            button2.Location = new Point(319, 497);
             button2.Name = "button2";
             button2.Size = new Size(190, 63);
             button2.TabIndex = 2;
@@ -57,7 +59,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(224, 497);
+            button3.Location = new Point(84, 497);
             button3.Name = "button3";
             button3.Size = new Size(190, 63);
             button3.TabIndex = 3;
@@ -76,17 +78,28 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(446, 468);
+            comboBox1.Location = new Point(319, 468);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(190, 23);
             comboBox1.TabIndex = 5;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(554, 497);
+            button1.Name = "button1";
+            button1.Size = new Size(170, 63);
+            button1.TabIndex = 6;
+            button1.Text = "Add an Entry";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // ucMainApp
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
+            Controls.Add(button1);
             Controls.Add(comboBox1);
             Controls.Add(dataGridView1);
             Controls.Add(button3);
@@ -94,6 +107,7 @@
             Controls.Add(label1);
             Name = "ucMainApp";
             Size = new Size(900, 600);
+            Load += ucMainApp_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -106,5 +120,6 @@
         private Button button3;
         private DataGridView dataGridView1;
         private ComboBox comboBox1;
+        private Button button1;
     }
 }

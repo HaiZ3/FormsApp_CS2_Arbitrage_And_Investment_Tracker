@@ -65,7 +65,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(389, 235);
             label1.Name = "label1";
-            label1.Size = new Size(63, 15);
+            label1.Size = new Size(64, 15);
             label1.TabIndex = 9;
             label1.Text = "Sheet Type";
             // 
@@ -90,6 +90,7 @@
             Controls.Add(comboBox1);
             Name = "ucCreateSheet";
             Size = new Size(900, 600);
+            Load += ucCreateSheet_Load;
             ResumeLayout(false);
             PerformLayout();
         }

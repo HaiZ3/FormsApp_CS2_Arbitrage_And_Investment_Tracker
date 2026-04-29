@@ -1,4 +1,7 @@
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
 using Microsoft.EntityFrameworkCore;
@@ -31,14 +34,18 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
             services.AddScoped<IEntryService, EntryService>();
             services.AddScoped<ISheetService, SheetService>();
 
+            services.AddScoped<Form1>();
+            services.AddScoped<ucCreateUser>();
+            services.AddScoped<ucLoginUser>();
+            services.AddScoped<ucMainApp>();
+            services.AddScoped<ucCreateSheet>();
+            services.AddScoped<ucAddEntry>();
+
             ServiceProvider = services.BuildServiceProvider();
 
             ApplicationConfiguration.Initialize();
 
-            var db = ServiceProvider.GetRequiredService<CS2TrackerContext>();
-            var form = new Form1(db);
-
-            Application.Run(form);
+            Application.Run(ServiceProvider.GetRequiredService<Form1>());
         }
     }
 }

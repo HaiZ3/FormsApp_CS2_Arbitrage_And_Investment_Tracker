@@ -3,6 +3,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,7 +24,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         {
             SkinInfo skinInfo = new SkinInfo(entryName,itemFloat,skinVariant
                 ,skinCondition);
-            skinInfo.GetItemType();
+
+            skinInfo.SetItemType();
+            skinInfo.SetMarketHashName();
 
             Entry entry = new Entry(quantity,dateBought,dateSold,buyPrice,sellPrice,sheetId,skinInfo);
             entry.DataSource = EntryDataSource.Regular;

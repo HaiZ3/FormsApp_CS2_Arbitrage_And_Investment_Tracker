@@ -1,6 +1,8 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Session;
@@ -16,14 +18,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 {
     public partial class ucMainApp : UserControl
     {
-        private CS2TrackerContext _context;
-        private SheetService _sheetService;
-        public ucMainApp(CS2TrackerContext context)
+        private ISheetService _sheetService;
+        public ucMainApp(ISheetService sheetService)
         {
             InitializeComponent();
-            _context = context;
-            SheetService sheetService = new(_context);
-            var sheetLoader = sheetService.LoadSheets(UserSession.UserId);
+            _sheetService = sheetService;
+            var sheetLoader = _sheetService.LoadSheets(UserSession.UserId);
             comboBox1.DataSource = sheetLoader.Result.Data;
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "Id";
@@ -39,7 +39,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
         {
             if (this.ParentForm is Form1 mainForm)
             {
-                mainForm.LoadUserControl(new ucCreateSheet(_context));
+                mainForm.LoadUserControl<ucCreateSheet>();
             }
         }
 
@@ -48,7 +48,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
             int sheetId = (int)comboBox1.SelectedValue;
 
             var result = _sheetService.GetSheetById(sheetId).Result;
-            if(result.Success == false)
+            if (result.Success == false)
             {
                 MessageBox.Show(result.ErrorMessage);
                 return;
@@ -82,6 +82,19 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.MultiSelect = false;
+        }
+
+        private void ucMainApp_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (this.ParentForm is Form1 mainForm)
+            {
+                mainForm.LoadUserControl<ucAddEntry>();
+            }
         }
     }
 }
