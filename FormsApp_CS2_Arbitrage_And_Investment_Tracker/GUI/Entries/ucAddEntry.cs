@@ -54,26 +54,26 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             numericUpDown3.Maximum = 1000000;
             numericUpDown3.DecimalPlaces = 2;
             numericUpDown3.Increment = 0.01M;
+        }
 
-            var sheetLoader = _sheetService.LoadSheets(UserSession.UserId);
-            comboBox3.DataSource = sheetLoader.Result.Data;
+        private async void ucAddEntry_Load(object sender, EventArgs e)
+        {
+            var result = await _sheetService.LoadSheets(UserSession.UserId);
+            if (!result.Success)
+            {
+                MessageBox.Show("Failed to load sheets.");
+                return;
+            }
+            comboBox3.DataSource = result.Data;
             comboBox3.DisplayMember = "Name";
             comboBox3.ValueMember = "Id";
-
-            //SkinCondition? skinCondition = (SkinCondition?)comboBox1.SelectedValue;
         }
-
-        private void ucAddEntry_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             string name = textBox1.Text;
             decimal? itemFloat = (decimal)numericUpDown2.Value;
@@ -90,12 +90,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             int sheetId = (int)comboBox3.SelectedValue;
             decimal buyPrice = numericUpDown3.Value;
 
-            var res = _entryService.AddEntry(sheetId,name,quantity
+            var res = await _entryService.AddEntry(sheetId,name,quantity
                 ,buyTime,null,buyPrice,null,itemFloat,skinCondition,skinVariant);
 
-            if(res.Result.Success == false)
+            if(res.Success == false)
             {
-                MessageBox.Show(res.Result.ErrorMessage);
+                MessageBox.Show(res.ErrorMessage);
             }
             else
             {

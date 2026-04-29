@@ -43,11 +43,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             int sheetId = (int)comboBox1.SelectedValue;
 
-            var result = _sheetService.GetSheetById(sheetId).Result;
+            var result = await _sheetService.GetSheetById(sheetId);
             if (result.Success == false)
             {
                 MessageBox.Show(result.ErrorMessage);

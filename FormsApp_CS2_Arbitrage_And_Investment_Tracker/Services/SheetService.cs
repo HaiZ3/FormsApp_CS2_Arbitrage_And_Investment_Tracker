@@ -44,7 +44,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             Sheet? sheet = await _context.Sheets.FirstOrDefaultAsync(s => s.Id == sheetId);
             if(sheet == null)
             {
-                return ServiceResultGeneric<Sheet>.Fail("Error");
+                return ServiceResultGeneric<Sheet>.Fail("No such sheet exists!");
             }
             return ServiceResultGeneric<Sheet>.Ok(sheet);
         }

@@ -32,7 +32,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             entry.DataSource = EntryDataSource.Regular;
 
             _context.Add(entry);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return ServiceResult.Ok();
         }

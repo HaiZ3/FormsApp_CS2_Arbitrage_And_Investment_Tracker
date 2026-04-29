@@ -5,7 +5,6 @@ using System.Text;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
 {
-    //AI code since I had no clue how to match all of valve's inconsistent namings
     public static class Cs2ItemTypeHelper
     {
         public static ItemType GetItemType(string itemName)
@@ -13,7 +12,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
             if (string.IsNullOrWhiteSpace(itemName))
                 return ItemType.Unknown;
 
-            // ── Starred items (knives & gloves) ─────────────────────────────────────
+            // knives and gloves begin with a star
             if (itemName.StartsWith("★"))
             {
                 if (itemName.Contains("Gloves") || itemName.Contains("Hand Wraps"))
@@ -22,7 +21,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
                 return ItemType.Knife;
             }
 
-            // ── Packaging ────────────────────────────────────────────────────────────
+            // cases,packages
             if (itemName.EndsWith("Case") ||
                 itemName.Contains("Weapon Case") ||
                 (itemName.Contains("Operation") && itemName.Contains("Case")))
@@ -34,11 +33,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
             if (itemName.Contains("Collection Package") || itemName.EndsWith("Collection"))
                 return ItemType.CollectionPackage;
 
-            // Capsule: narrowed - "Autograph" alone was catching sticker names
+            // capsules and authograph capsules
             if (itemName.Contains("Capsule") || itemName.Contains("Autograph Capsule"))
                 return ItemType.Capsule;
 
-            // ── Cosmetics ────────────────────────────────────────────────────────────
+            // cosmetic items
             if (itemName.StartsWith("Sticker |"))
                 return ItemType.Sticker;
 
@@ -54,14 +53,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
             if (itemName.StartsWith("Music Kit |"))
                 return ItemType.MusicKit;
 
-            // ── Agents ───────────────────────────────────────────────────────────────
-            // Agents follow "Name | Faction" — by this point all ★ items, packaging,
-            // and cosmetics are handled, so remaining pipe-separated names are agents.
-            // Returns Unknown instead of Agent for unrecognised items to surface gaps.
+            //agents checks if it contains the agent name if not the item is unknown
             if (itemName.Contains(" | "))
                 return IsKnownAgent(itemName) ? ItemType.Agent : ItemType.Unknown;
 
-            // ── Weapons (bare name, no skin suffix) ──────────────────────────────────
+            // lastly checks the weapons
             return itemName switch
             {
                 "Glock-18" or "USP-S" or "P2000" or "P250" or "Five-SeveN" or
@@ -89,8 +85,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
 
         private static bool IsKnownAgent(string itemName)
         {
-            // Agent names on Steam follow "Agent Name | Faction"
-            // Expand this set as new agents are released.
+            //Agents if new ones are released we would need to add more
             return itemName.Contains("| SEAL Frogman")
                 || itemName.Contains("| FBI")
                 || itemName.Contains("| SWAT")
