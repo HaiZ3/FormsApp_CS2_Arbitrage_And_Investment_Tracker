@@ -40,6 +40,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
             services.AddScoped<ucMainApp>();
             services.AddScoped<ucCreateSheet>();
             services.AddScoped<ucAddEntry>();
+            services.AddScoped<ucChangeEntryStatus>();
 
             ServiceProvider = services.BuildServiceProvider();
 

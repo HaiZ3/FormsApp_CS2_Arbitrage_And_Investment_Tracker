@@ -34,6 +34,7 @@
             dataGridView1 = new DataGridView();
             comboBox1 = new ComboBox();
             button1 = new Button();
+            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -41,6 +42,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13F);
+            label1.ForeColor = SystemColors.ButtonHighlight;
             label1.Location = new Point(403, 23);
             label1.Name = "label1";
             label1.Size = new Size(90, 25);
@@ -49,7 +51,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(319, 497);
+            button2.Location = new Point(254, 497);
             button2.Name = "button2";
             button2.Size = new Size(190, 63);
             button2.TabIndex = 2;
@@ -59,20 +61,20 @@
             // 
             // button3
             // 
-            button3.Location = new Point(84, 497);
+            button3.Location = new Point(27, 497);
             button3.Name = "button3";
             button3.Size = new Size(190, 63);
             button3.TabIndex = 3;
-            button3.Text = "Create a new Sheet";
+            button3.Text = "Create a new sheet";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(64, 51);
+            dataGridView1.Location = new Point(27, 51);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(736, 384);
+            dataGridView1.Size = new Size(837, 384);
             dataGridView1.TabIndex = 4;
             // 
             // comboBox1
@@ -86,19 +88,31 @@
             // 
             // button1
             // 
-            button1.Location = new Point(554, 497);
+            button1.Location = new Point(471, 497);
             button1.Name = "button1";
             button1.Size = new Size(170, 63);
             button1.TabIndex = 6;
-            button1.Text = "Add an Entry";
+            button1.Text = "Add an entry";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
+            // 
+            // button4
+            // 
+            button4.ForeColor = SystemColors.ControlText;
+            button4.Location = new Point(664, 497);
+            button4.Name = "button4";
+            button4.Size = new Size(170, 63);
+            button4.TabIndex = 7;
+            button4.Text = "Close an entry";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // ucMainApp
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
+            Controls.Add(button4);
             Controls.Add(button1);
             Controls.Add(comboBox1);
             Controls.Add(dataGridView1);
@@ -121,5 +135,6 @@
         private DataGridView dataGridView1;
         private ComboBox comboBox1;
         private Button button1;
+        private Button button4;
     }
 }

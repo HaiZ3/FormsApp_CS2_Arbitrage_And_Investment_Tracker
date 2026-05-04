@@ -33,6 +33,7 @@
             button1 = new Button();
             label1 = new Label();
             label2 = new Label();
+            button2 = new Button();
             SuspendLayout();
             // 
             // comboBox1
@@ -63,6 +64,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.ForeColor = SystemColors.ButtonHighlight;
             label1.Location = new Point(389, 235);
             label1.Name = "label1";
             label1.Size = new Size(64, 15);
@@ -72,17 +74,29 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.ForeColor = SystemColors.ButtonHighlight;
             label2.Location = new Point(389, 172);
             label2.Name = "label2";
             label2.Size = new Size(71, 15);
             label2.TabIndex = 10;
             label2.Text = "Sheet Name";
             // 
+            // button2
+            // 
+            button2.Location = new Point(331, 359);
+            button2.Name = "button2";
+            button2.Size = new Size(190, 51);
+            button2.TabIndex = 11;
+            button2.Text = "Back to Main App";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // ucCreateSheet
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
+            Controls.Add(button2);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button1);
@@ -102,5 +116,6 @@
         private Button button1;
         private Label label1;
         private Label label2;
+        private Button button2;
     }
 }

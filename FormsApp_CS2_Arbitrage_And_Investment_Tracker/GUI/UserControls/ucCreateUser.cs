@@ -1,4 +1,5 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
@@ -19,6 +20,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
         {
             InitializeComponent();
             _userService = userService;
+            Styler.StyleButton(loginBtn, "Back to Login");
+            Styler.StyleButton(createAccountBtn, "Create Account");
+            BackColor = Color.FromArgb(37, 37, 38);
         }
 
         private void ucCreateUser_Load(object sender, EventArgs e)

@@ -1,4 +1,5 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers;
@@ -20,6 +21,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
         {
             InitializeComponent();
             _userService = userService;
+            Styler.StyleButton(loginBtn, "Login");
+            Styler.StyleButton(createAccountBtn, "Create Account");
+            BackColor = Color.FromArgb(37, 37, 38);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -29,7 +33,6 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
 
         private async void loginBtn_Click(object sender, EventArgs e)
         {
-
             string username = textBox1.Text;
             string passwordHash = textBox2.Text;
 

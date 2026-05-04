@@ -1,6 +1,8 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
@@ -19,7 +21,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
     {
         ISheetService _sheetService;
         IEntryService _entryService;
-        public ucAddEntry(IEntryService entryService,ISheetService sheetService)
+        public ucAddEntry(IEntryService entryService, ISheetService sheetService)
         {
             _entryService = entryService;
             _sheetService = sheetService;
@@ -30,6 +32,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
                 .Select(e => new { Value = (SkinCondition?)e, Text = e.ToString() })
                 .Prepend(new { Value = (SkinCondition?)null, Text = "None" })
                 .ToList();
+
+            Styler.StyleButton(button1,"Add the Entry");
+            Styler.StyleButton(button2,"Back to Main Menu");
+            BackColor = Color.FromArgb(37, 37, 38);
 
             comboBox1.DisplayMember = "Text";
             comboBox1.ValueMember = "Value";
@@ -90,10 +96,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             int sheetId = (int)comboBox3.SelectedValue;
             decimal buyPrice = numericUpDown3.Value;
 
-            var res = await _entryService.AddEntry(sheetId,name,quantity
-                ,buyTime,null,buyPrice,null,itemFloat,skinCondition,skinVariant);
+            var res = await _entryService.AddEntry(sheetId, name, quantity
+                , buyTime, null, buyPrice, null, itemFloat, skinCondition, skinVariant);
 
-            if(res.Success == false)
+            if (res.Success == false)
             {
                 MessageBox.Show(res.ErrorMessage);
             }
@@ -106,6 +112,14 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(this.ParentForm is Form1 mainForm)
+            {
+                mainForm.LoadUserControl<ucMainApp>();
+            }
         }
     }
 }

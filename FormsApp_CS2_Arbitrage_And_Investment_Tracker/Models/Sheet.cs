@@ -31,7 +31,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         public SheetType SheetType { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public ICollection<Entry> Entries { get; set; } = new List<Entry>();
+        public ICollection<Entry> Entries { get; set; }
 
     }
 }

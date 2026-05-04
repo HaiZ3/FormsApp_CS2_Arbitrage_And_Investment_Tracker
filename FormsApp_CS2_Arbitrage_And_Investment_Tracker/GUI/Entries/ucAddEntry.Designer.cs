@@ -46,6 +46,7 @@
             label8 = new Label();
             label9 = new Label();
             numericUpDown3 = new NumericUpDown();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
@@ -62,6 +63,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15F);
+            label1.ForeColor = SystemColors.ButtonHighlight;
             label1.Location = new Point(357, 0);
             label1.Name = "label1";
             label1.Size = new Size(148, 28);
@@ -71,6 +73,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.ForeColor = SystemColors.ButtonHighlight;
             label2.Location = new Point(396, 118);
             label2.Name = "label2";
             label2.Size = new Size(66, 15);
@@ -80,6 +83,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.ForeColor = SystemColors.ButtonHighlight;
             label3.Location = new Point(413, 225);
             label3.Name = "label3";
             label3.Size = new Size(33, 15);
@@ -98,6 +102,7 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.ForeColor = SystemColors.ButtonHighlight;
             label4.Location = new Point(392, 279);
             label4.Name = "label4";
             label4.Size = new Size(85, 15);
@@ -115,6 +120,7 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.ForeColor = SystemColors.ButtonHighlight;
             label5.Location = new Point(392, 348);
             label5.Name = "label5";
             label5.Size = new Size(68, 15);
@@ -131,6 +137,7 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.ForeColor = SystemColors.ButtonHighlight;
             label6.Location = new Point(403, 411);
             label6.Name = "label6";
             label6.Size = new Size(57, 15);
@@ -147,6 +154,7 @@
             // label7
             // 
             label7.AutoSize = true;
+            label7.ForeColor = SystemColors.ButtonHighlight;
             label7.Location = new Point(402, 476);
             label7.Name = "label7";
             label7.Size = new Size(53, 15);
@@ -182,6 +190,7 @@
             // label8
             // 
             label8.AutoSize = true;
+            label8.ForeColor = SystemColors.ButtonHighlight;
             label8.Location = new Point(412, 68);
             label8.Name = "label8";
             label8.Size = new Size(36, 15);
@@ -191,6 +200,7 @@
             // label9
             // 
             label9.AutoSize = true;
+            label9.ForeColor = SystemColors.ButtonHighlight;
             label9.Location = new Point(401, 172);
             label9.Name = "label9";
             label9.Size = new Size(33, 15);
@@ -204,11 +214,22 @@
             numericUpDown3.Size = new Size(199, 23);
             numericUpDown3.TabIndex = 17;
             // 
+            // button2
+            // 
+            button2.Location = new Point(578, 533);
+            button2.Name = "button2";
+            button2.Size = new Size(200, 64);
+            button2.TabIndex = 19;
+            button2.Text = "Back to Main App";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // ucAddEntry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
+            Controls.Add(button2);
             Controls.Add(label9);
             Controls.Add(numericUpDown3);
             Controls.Add(label8);
@@ -257,5 +278,6 @@
         private Label label8;
         private Label label9;
         private NumericUpDown numericUpDown3;
+        private Button button2;
     }
 }

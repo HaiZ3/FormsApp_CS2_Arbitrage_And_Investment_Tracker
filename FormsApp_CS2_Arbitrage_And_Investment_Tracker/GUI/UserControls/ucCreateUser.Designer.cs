@@ -34,8 +34,8 @@
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             label3 = new Label();
-            button2 = new Button();
-            button1 = new Button();
+            createAccountBtn = new Button();
+            loginBtn = new Button();
             SuspendLayout();
             // 
             // textBox1
@@ -48,6 +48,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.ForeColor = SystemColors.ButtonHighlight;
             label1.Location = new Point(396, 124);
             label1.Name = "label1";
             label1.Size = new Size(60, 15);
@@ -57,6 +58,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.ForeColor = SystemColors.ButtonHighlight;
             label2.Location = new Point(405, 198);
             label2.Name = "label2";
             label2.Size = new Size(36, 15);
@@ -80,39 +82,40 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.ForeColor = SystemColors.ButtonHighlight;
             label3.Location = new Point(396, 255);
             label3.Name = "label3";
             label3.Size = new Size(57, 15);
             label3.TabIndex = 7;
             label3.Text = "Password";
             // 
-            // button2
+            // createAccountBtn
             // 
-            button2.Location = new Point(340, 318);
-            button2.Name = "button2";
-            button2.Size = new Size(178, 49);
-            button2.TabIndex = 8;
-            button2.Text = "Create Account";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            createAccountBtn.Location = new Point(340, 318);
+            createAccountBtn.Name = "createAccountBtn";
+            createAccountBtn.Size = new Size(178, 49);
+            createAccountBtn.TabIndex = 8;
+            createAccountBtn.Text = "Create Account";
+            createAccountBtn.UseVisualStyleBackColor = true;
+            createAccountBtn.Click += button2_Click;
             // 
-            // button1
+            // loginBtn
             // 
-            button1.Location = new Point(340, 400);
-            button1.Name = "button1";
-            button1.Size = new Size(178, 49);
-            button1.TabIndex = 9;
-            button1.Text = "Login Page";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            loginBtn.Location = new Point(340, 400);
+            loginBtn.Name = "loginBtn";
+            loginBtn.Size = new Size(178, 49);
+            loginBtn.TabIndex = 9;
+            loginBtn.Text = "Login Page";
+            loginBtn.UseVisualStyleBackColor = true;
+            loginBtn.Click += button1_Click;
             // 
             // ucCreateUser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
-            Controls.Add(button1);
-            Controls.Add(button2);
+            Controls.Add(loginBtn);
+            Controls.Add(createAccountBtn);
             Controls.Add(label3);
             Controls.Add(textBox3);
             Controls.Add(textBox2);
@@ -134,7 +137,7 @@
         private TextBox textBox2;
         private TextBox textBox3;
         private Label label3;
-        private Button button2;
-        private Button button1;
+        private Button createAccountBtn;
+        private Button loginBtn;
     }
 }

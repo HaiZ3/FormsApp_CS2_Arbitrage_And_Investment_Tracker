@@ -41,7 +41,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 
         public async Task<ServiceResultGeneric<Sheet>> GetSheetById(int sheetId)
         {
-            Sheet? sheet = await _context.Sheets.FirstOrDefaultAsync(s => s.Id == sheetId);
+            Sheet? sheet = await _context.Sheets
+                .Include(s => s.Entries)
+                .FirstOrDefaultAsync(s => s.Id == sheetId);
             if(sheet == null)
             {
                 return ServiceResultGeneric<Sheet>.Fail("No such sheet exists!");

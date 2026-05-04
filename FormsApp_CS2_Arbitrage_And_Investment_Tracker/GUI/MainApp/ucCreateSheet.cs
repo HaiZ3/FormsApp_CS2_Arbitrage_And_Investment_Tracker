@@ -1,5 +1,6 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
@@ -24,6 +25,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
             _sheetService = sheetService;
             InitializeComponent();
             comboBox1.DataSource = Enum.GetValues(typeof(SheetType));
+            Styler.StyleButton(button1, "Create Sheet");
+            Styler.StyleButton(button2, "Back to Main Menu");
+            BackColor = Color.FromArgb(37, 37, 38);
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -49,6 +53,14 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
         private void ucCreateSheet_Load(object sender, EventArgs e)
         {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (this.ParentForm is Form1 mainForm)
+            {
+                mainForm.LoadUserControl<ucMainApp>();
+            }
         }
     }
 }
