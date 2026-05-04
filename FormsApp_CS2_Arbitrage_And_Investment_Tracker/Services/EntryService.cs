@@ -5,6 +5,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,7 +40,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         }
         public async Task<ServiceResultGeneric<ICollection<Entry>>> GetEntriesBySheet(int sheetId)
         {
-            ICollection<Entry>? entries = _context.Entries.Where(e => e.SheetId == sheetId).ToArray();
+            ICollection<Entry>? entries = await _context.Entries
+                .Where(e => e.SheetId == sheetId)
+                .Include(e => e.SkinInfo)
+                .ToListAsync();
             if (entries == null || entries.Count == 0)
             {
                 return ServiceResultGeneric<ICollection<Entry>>.Fail("No entries found for this sheet.");
@@ -51,7 +55,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         }
         public async Task<ServiceResult> CloseEntry(int entryId, DateTime dateSold, decimal sellPrice)
         {
-            Entry? entry = _context.Entries.FirstOrDefault(e => e.Id == entryId);
+            Entry? entry = await _context.Entries.FirstOrDefaultAsync(e => e.Id == entryId);
             if (entry == null)
             {
                 return ServiceResult.Fail("Entry not found.");
@@ -68,7 +72,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         }
         public async Task<ServiceResult> CancelEntry(int entryId)
         {
-            Entry? entry = _context.Entries.FirstOrDefault(e => e.Id == entryId);
+            Entry? entry = await _context.Entries.FirstOrDefaultAsync(e => e.Id == entryId);
             if (entry == null)
             {
                 return ServiceResult.Fail("Entry not found.");

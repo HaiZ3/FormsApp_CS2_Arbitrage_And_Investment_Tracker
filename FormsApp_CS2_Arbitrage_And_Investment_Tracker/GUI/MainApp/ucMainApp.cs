@@ -30,10 +30,6 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
             Styler.StyleButton(button4, "Close an entry");
             Styler.StyleDataGridView(dataGridView1);
             _sheetService = sheetService;
-            var sheetLoader = _sheetService.LoadSheets(UserSession.UserId);
-            comboBox1.DataSource = sheetLoader.Result.Data;
-            comboBox1.DisplayMember = "Name";
-            comboBox1.ValueMember = "Id";
             BackColor = Color.FromArgb(37, 37, 38);
         }
 
@@ -82,9 +78,16 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
             dataGridView1.DataSource = dgvSource;
         }
 
-        private void ucMainApp_Load(object sender, EventArgs e)
+        private async void ucMainApp_Load(object sender, EventArgs e)
         {
-
+            ServiceResultGeneric<ICollection<Sheet>> sheetLoader = await _sheetService.LoadSheets(UserSession.UserId);
+            if (!sheetLoader.Success)
+            {
+                MessageBox.Show(sheetLoader.ErrorMessage);
+            }
+            comboBox1.DataSource = sheetLoader.Data;
+            comboBox1.DisplayMember = "Name";
+            comboBox1.ValueMember = "Id";
         }
 
         private void button1_Click(object sender, EventArgs e)
