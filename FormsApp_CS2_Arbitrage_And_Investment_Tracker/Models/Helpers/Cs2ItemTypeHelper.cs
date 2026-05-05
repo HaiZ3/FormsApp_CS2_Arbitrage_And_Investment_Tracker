@@ -17,11 +17,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
             {
                 if (itemName.Contains("Gloves") || itemName.Contains("Hand Wraps"))
                     return ItemType.Gloves;
-
                 return ItemType.Knife;
             }
 
-            // cases,packages
+            // cases, packages
             if (itemName.EndsWith("Case") ||
                 itemName.Contains("Weapon Case") ||
                 (itemName.Contains("Operation") && itemName.Contains("Case")))
@@ -33,7 +32,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
             if (itemName.Contains("Collection Package") || itemName.EndsWith("Collection"))
                 return ItemType.CollectionPackage;
 
-            // capsules and authograph capsules
+            // capsules and autograph capsules
             if (itemName.Contains("Capsule") || itemName.Contains("Autograph Capsule"))
                 return ItemType.Capsule;
 
@@ -53,39 +52,43 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
             if (itemName.StartsWith("Music Kit |"))
                 return ItemType.MusicKit;
 
-            //agents checks if it contains the agent name if not the item is unknown
+            // items with a pipe: weapons or agents
             if (itemName.Contains(" | "))
-                return IsKnownAgent(itemName) ? ItemType.Agent : ItemType.Unknown;
-
-            // lastly checks the weapons
-            return itemName switch
             {
-                "Glock-18" or "USP-S" or "P2000" or "P250" or "Five-SeveN" or
-                "Tec-9" or "CZ75-Auto" or "Desert Eagle" or "R8 Revolver"
-                    => ItemType.Pistol,
+                if (IsKnownAgent(itemName))
+                    return ItemType.Agent;
 
-                "AK-47" or "M4A4" or "M4A1-S" or "FAMAS" or "Galil AR" or "AUG" or "SG 553"
-                    => ItemType.Rifle,
+                string baseName = itemName.Split('|')[0].Trim();
+                return baseName switch
+                {
+                    "Glock-18" or "USP-S" or "P2000" or "P250" or "Five-SeveN" or
+                    "Tec-9" or "CZ75-Auto" or "Desert Eagle" or "R8 Revolver"
+                        => ItemType.Pistol,
 
-                "AWP" or "SSG 08" or "SCAR-20" or "G3SG1"
-                    => ItemType.SniperRifle,
+                    "AK-47" or "M4A4" or "M4A1-S" or "FAMAS" or "Galil AR" or "AUG" or "SG 553"
+                        => ItemType.Rifle,
 
-                "MP9" or "MAC-10" or "MP7" or "MP5-SD" or "UMP-45" or "P90" or "PP-Bizon"
-                    => ItemType.SMG,
+                    "AWP" or "SSG 08" or "SCAR-20" or "G3SG1"
+                        => ItemType.SniperRifle,
 
-                "Nova" or "XM1014" or "MAG-7" or "Sawed-Off"
-                    => ItemType.Shotgun,
+                    "MP9" or "MAC-10" or "MP7" or "MP5-SD" or "UMP-45" or "P90" or "PP-Bizon"
+                        => ItemType.SMG,
 
-                "M249" or "Negev"
-                    => ItemType.MachineGun,
+                    "Nova" or "XM1014" or "MAG-7" or "Sawed-Off"
+                        => ItemType.Shotgun,
 
-                _ => ItemType.Unknown
-            };
+                    "M249" or "Negev"
+                        => ItemType.MachineGun,
+
+                    _ => ItemType.Unknown
+                };
+            }
+
+            return ItemType.Unknown;
         }
 
         private static bool IsKnownAgent(string itemName)
         {
-            //Agents if new ones are released we would need to add more
             return itemName.Contains("| SEAL Frogman")
                 || itemName.Contains("| FBI")
                 || itemName.Contains("| SWAT")

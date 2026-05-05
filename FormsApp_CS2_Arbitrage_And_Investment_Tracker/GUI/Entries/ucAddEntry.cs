@@ -5,6 +5,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Session;
 using System;
@@ -13,6 +14,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
@@ -33,8 +35,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
                 .Prepend(new { Value = (SkinCondition?)null, Text = "None" })
                 .ToList();
 
-            Styler.StyleButton(button1,"Add the Entry");
-            Styler.StyleButton(button2,"Back to Main Menu");
+            Styler.StyleButton(button1, "Add the Entry");
+            Styler.StyleButton(button2, "Back to Main Menu");
+            Styler.StyleButton(button3, "Import from the CSV");
             BackColor = Color.FromArgb(37, 37, 38);
 
             comboBox1.DisplayMember = "Text";
@@ -116,9 +119,21 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(this.ParentForm is Form1 mainForm)
+            if (this.ParentForm is Form1 mainForm)
             {
                 mainForm.LoadUserControl<ucMainApp>();
+            }
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            int sheetId = (int)comboBox3.SelectedValue;
+
+            ServiceResultGeneric<int[]> res = await _entryService.ImportFromCsvToSheet(sheetId);
+
+            if (res.Success)
+            {
+                MessageBox.Show($"Successfully imported {res.Data[1]} entries from CSV. Failed entries: {res.Data[0]}");
             }
         }
     }

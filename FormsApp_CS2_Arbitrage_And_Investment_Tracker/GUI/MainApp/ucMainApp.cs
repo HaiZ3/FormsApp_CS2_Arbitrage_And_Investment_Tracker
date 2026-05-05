@@ -4,6 +4,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.DTOs;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
@@ -21,7 +22,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
     public partial class ucMainApp : UserControl
     {
         private ISheetService _sheetService;
-        public ucMainApp(ISheetService sheetService)
+        private IEntryService _entryService;
+        public ucMainApp(ISheetService sheetService, IEntryService entryService)
         {
             InitializeComponent();
             Styler.StyleButton(button1, "Add Entry");
@@ -31,6 +33,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
             Styler.StyleDataGridView(dataGridView1);
             _sheetService = sheetService;
             BackColor = Color.FromArgb(37, 37, 38);
+            _entryService = entryService;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

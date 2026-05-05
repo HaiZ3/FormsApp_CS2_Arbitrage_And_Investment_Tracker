@@ -47,6 +47,7 @@
             label9 = new Label();
             numericUpDown3 = new NumericUpDown();
             button2 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
@@ -224,11 +225,22 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button3
+            // 
+            button3.Location = new Point(90, 533);
+            button3.Name = "button3";
+            button3.Size = new Size(200, 64);
+            button3.TabIndex = 20;
+            button3.Text = "Import from CSV";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // ucAddEntry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label9);
             Controls.Add(numericUpDown3);
@@ -279,5 +291,6 @@
         private Label label9;
         private NumericUpDown numericUpDown3;
         private Button button2;
+        private Button button3;
     }
 }

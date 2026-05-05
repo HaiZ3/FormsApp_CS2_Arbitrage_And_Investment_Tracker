@@ -43,7 +43,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13F);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(403, 23);
+            label1.Location = new Point(402, 10);
             label1.Name = "label1";
             label1.Size = new Size(90, 25);
             label1.TabIndex = 0;
@@ -72,7 +72,7 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(27, 51);
+            dataGridView1.Location = new Point(27, 38);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(837, 384);
             dataGridView1.TabIndex = 4;

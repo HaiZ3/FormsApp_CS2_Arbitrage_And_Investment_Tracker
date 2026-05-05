@@ -16,6 +16,6 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices
         public Task<ServiceResultGeneric<ICollection<Entry>>> GetEntriesBySheet(int sheetId);
         public Task<ServiceResult> CloseEntry(int entryId, DateTime dateSold, decimal sellPrice);
         public Task<ServiceResult> CancelEntry(int entryId);
-
+        public Task<ServiceResultGeneric<int[]>> ImportFromCsvToSheet(int sheetId);
     }
 }

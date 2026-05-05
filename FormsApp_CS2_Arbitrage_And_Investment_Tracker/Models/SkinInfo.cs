@@ -17,7 +17,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         {
 
         }
-        public SkinInfo(string name, decimal? itemFloat, SkinVariant skinVariant
+        public SkinInfo(string name, decimal? itemFloat, SkinVariant? skinVariant
             , SkinCondition? skinCondition)
         {
             this.Name = name;
