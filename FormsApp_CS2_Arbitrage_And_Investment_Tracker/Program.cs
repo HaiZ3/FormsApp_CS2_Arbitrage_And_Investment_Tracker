@@ -34,6 +34,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
             services.AddScoped<IEntryService, EntryService>();
             services.AddScoped<ISheetService, SheetService>();
 
+            services.AddHttpClient<ICurrencyService, CurrencyService>();
+
+
             services.AddScoped<Form1>();
             services.AddScoped<ucCreateUser>();
             services.AddScoped<ucLoginUser>();
@@ -45,6 +48,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
             ServiceProvider = services.BuildServiceProvider();
 
             ApplicationConfiguration.Initialize();
+
+
 
             Application.Run(ServiceProvider.GetRequiredService<Form1>());
         }

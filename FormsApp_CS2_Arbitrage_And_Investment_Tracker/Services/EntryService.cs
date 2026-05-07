@@ -123,7 +123,6 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
                     }
                     SkinInfo skinInfo = new SkinInfo(record.Name, null, null, null);
                     skinInfo.SetItemType();
-                    skinInfo.SetMarketHashName();
 
                     Entry entry = new Entry(1, null, null, record.BuyPrice, record.SellPrice, 1
                         , skinInfo, EntryDataSource.Legacy, record.Return, record.DailyReturn, EntryStatus.Closed);

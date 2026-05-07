@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context
 {
@@ -16,6 +17,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context
         public DbSet<SkinInfo> SkinInfos { get; set; }
         public DbSet<DailyStat> DailyStats { get; set; }
         public DbSet<OverallStat> OverallStats { get; set; }
+        public DbSet<CurrencyInfo> CurrencyInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

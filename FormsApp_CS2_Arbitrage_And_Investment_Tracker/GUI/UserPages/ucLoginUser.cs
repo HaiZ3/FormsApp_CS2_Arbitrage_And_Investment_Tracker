@@ -17,13 +17,15 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
     public partial class ucLoginUser : UserControl
     {
         IUserService _userService;
-        public ucLoginUser(IUserService userService)
+        ICurrencyService _currencyService;
+        public ucLoginUser(IUserService userService, ICurrencyService currencyService)
         {
             InitializeComponent();
             _userService = userService;
             Styler.StyleButton(loginBtn, "Login");
             Styler.StyleButton(createAccountBtn, "Create Account");
             BackColor = Color.FromArgb(37, 37, 38);
+            _currencyService = currencyService;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
