@@ -22,11 +22,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.CurrencyConverter
             _currencyService = currencyService;
             Styler.StyleButton(button1, "Convert");
             Styler.StyleButton(button2, "Refresh Rates");
+            Styler.StyleButton(button3, "Close the converter");
             BackColor = Color.FromArgb(37, 37, 38);
-        }
-        private void frmCurrencyConverter_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.Dispose();
+            this.ControlBox = false;
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -65,6 +64,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.CurrencyConverter
                 return;
             }
             MessageBox.Show("Rates refreshed");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

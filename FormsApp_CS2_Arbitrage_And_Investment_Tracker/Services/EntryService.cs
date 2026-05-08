@@ -65,12 +65,13 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             }
             else
             {
-                entry.DailyReturn = (decimal)(Math.Pow((double)(sellPrice / entry.BuyPrice), 1.0 / days) - 1) * 100;
-                entry.Return = ((sellPrice - entry.BuyPrice) / entry.BuyPrice) * 100;
-                entry.DateSold = dateSold;
-                entry.SellPrice = sellPrice;
+                entry.SellPrice = sellPrice * entry.Quantity;
                 entry.Status = EntryStatus.Closed;
-                entry.Profit = sellPrice - entry.BuyPrice;
+                entry.Profit = entry.SellPrice - entry.BuyPrice;
+                entry.Return = ((entry.SellPrice - entry.BuyPrice) / entry.BuyPrice) * 100;
+                entry.DateSold = dateSold;
+                entry.HoldDays = (entry.DateBought - entry.DateSold).Value.Days;
+                entry.DailyReturn = entry.Return / entry.HoldDays;
                 _context.Update(entry);
                 await _context.SaveChangesAsync();
                 return ServiceResult.Ok();
@@ -94,7 +95,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         public async Task<ServiceResultGeneric<int[]>> ImportFromCsvToSheetAsync(int sheetId)
         {
             string filePath =
-                @"C:\Users\406\source\repos\HaiZ3\FormsApp_CS2_Arbitrage_And_Investment_Tracker\FormsApp_CS2_Arbitrage_And_Investment_Tracker\CSVs\Skins_v2.csv";
+                @"C:\Users\skele\source\repos\FormsApp_CS2_Arbitrage_And_Investment_Tracker\FormsApp_CS2_Arbitrage_And_Investment_Tracker\CSVs\Skins_v2.csv";
             List<EntryCsvDto> entriesFromCsv = new();
 
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)

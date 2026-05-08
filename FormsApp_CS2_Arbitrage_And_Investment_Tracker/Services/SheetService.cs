@@ -39,7 +39,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             return ServiceResultGeneric<ICollection<Sheet>>.Ok(sheets);
         }
 
-        public async Task<ServiceResultGeneric<Sheet>> GetSheetByIdAsync(int sheetId)
+        public async Task<ServiceResultGeneric<Sheet>> GetSheetByIdAsync(int? sheetId)
         {
             Sheet? sheet = await _context.Sheets
                 .Include(s => s.Entries)

@@ -48,7 +48,22 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            int sheetId = (int)comboBox1.SelectedValue;
+
+
+            int? sheetId = (int?)comboBox1.SelectedValue;
+
+            if (!sheetId.HasValue)
+            {
+                ServiceResultGeneric<ICollection<Sheet>> sheetLoader = await _sheetService.LoadSheetsAsync(UserSession.UserId);
+                if (!sheetLoader.Success)
+                {
+                    MessageBox.Show(sheetLoader.ErrorMessage);
+                }
+                comboBox1.DataSource = sheetLoader.Data;
+                comboBox1.DisplayMember = "Name";
+                comboBox1.ValueMember = "Id";
+                return;
+            }
 
             ServiceResultGeneric<Sheet> result = await _sheetService.GetSheetByIdAsync(sheetId);
             if (result.Success == false)
@@ -65,16 +80,17 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
             EntryDisplayDto[] dgvSource = result.Data.Entries.Select(e => new EntryDisplayDto
             {
+                Id = e.Id,
                 Name = e.Name,
                 Quantity = e.Quantity,
-                BuyPrice = e.BuyPrice,
-                SellPrice = e.SellPrice,
+                BuyPrice = $"{e.BuyPrice:f2}$",
+                SellPrice = $"{e.SellPrice:f2}$",
                 DateBought = e.DateBought,
                 DateSold = e.DateSold,
                 Status = e.Status,
-                Profit = e.Profit,
-                Return = e.Return,
-            }).ToArray();
+                Profit = $"{e.Profit:f2}$",
+                ReturnPercent = $"{e.Return:f2}%",
+            }).OrderBy(x => x.Status).ToArray();
 
             dataGridView1.DataSource = dgvSource;
         }
@@ -109,15 +125,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (_currencyForm == null || _currencyForm.IsDisposed)
-            {
-                _currencyForm = _serviceProvider.GetRequiredService<frmCurrencyConverter>();
-                _currencyForm.Show();
-            }
-            else
-            {
-                _currencyForm.BringToFront();
-            }
+            var form = _serviceProvider.GetRequiredService<frmCurrencyConverter>();
+            form.Show();
         }
     }
 }

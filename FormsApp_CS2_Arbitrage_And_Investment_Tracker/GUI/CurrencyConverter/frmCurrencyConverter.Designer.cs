@@ -36,6 +36,7 @@
             textBox2 = new TextBox();
             button1 = new Button();
             button2 = new Button();
+            button3 = new Button();
             SuspendLayout();
             // 
             // comboBox1
@@ -72,7 +73,7 @@
             label2.ForeColor = SystemColors.ButtonHighlight;
             label2.Location = new Point(401, 279);
             label2.Name = "label2";
-            label2.Size = new Size(71, 15);
+            label2.Size = new Size(70, 15);
             label2.TabIndex = 3;
             label2.Text = "To Currency";
             label2.Click += label2_Click;
@@ -111,12 +112,23 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button3
+            // 
+            button3.Location = new Point(353, 65);
+            button3.Name = "button3";
+            button3.Size = new Size(190, 51);
+            button3.TabIndex = 11;
+            button3.Text = "Close the Converter";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // frmCurrencyConverter
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
-            ClientSize = new Size(884, 561);
+            ClientSize = new Size(1034, 561);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(textBox2);
@@ -142,5 +154,6 @@
         private TextBox textBox2;
         private Button button1;
         private Button button2;
+        private Button button3;
     }
 }

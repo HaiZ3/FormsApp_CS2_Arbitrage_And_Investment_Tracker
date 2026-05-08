@@ -29,7 +29,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
             Quantity = quantity;
             DateBought = dateBought;
             DateSold = dateSold;
-            BuyPrice = buyPrice;
+            BuyPrice = buyPrice * quantity;
             SellPrice = sellPrice;
             SkinInfo = skinInfo;
             SheetId = sheetId;

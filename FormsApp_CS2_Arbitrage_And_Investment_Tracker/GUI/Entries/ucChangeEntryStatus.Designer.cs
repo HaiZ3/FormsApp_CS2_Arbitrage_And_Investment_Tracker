@@ -133,7 +133,7 @@
             label3.ForeColor = SystemColors.ButtonHighlight;
             label3.Location = new Point(402, 400);
             label3.Name = "label3";
-            label3.Size = new Size(55, 15);
+            label3.Size = new Size(54, 15);
             label3.TabIndex = 15;
             label3.Text = "Sell Time";
             // 
@@ -172,7 +172,7 @@
             Controls.Add(comboBox1);
             Controls.Add(dataGridView1);
             Name = "ucChangeEntryStatus";
-            Size = new Size(900, 600);
+            Size = new Size(1050, 600);
             Load += ucChangeEntryStatus_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();

@@ -77,15 +77,18 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             {
                 MessageBox.Show(res.ErrorMessage);
             }
-            dataGridView1.DataSource = res.Data.Where(x => x.Status == EntryStatus.Open).Select(x => new EntryDisplayDto
+            dataGridView1.DataSource = res.Data.Where(x => x.Status == EntryStatus.Open).Select(e => new EntryDisplayDto
             {
-                Name = x.Name,
-                BuyPrice = x.BuyPrice,
-                Status = x.Status,
-                Quantity = x.Quantity,
-                DateBought = x.DateBought,
-                SellPrice = x.SellPrice,
-                DateSold = x.DateSold
+                Id = e.Id,
+                Name = e.Name,
+                Quantity = e.Quantity,
+                BuyPrice = $"{e.BuyPrice:f2}$",
+                SellPrice = $"{e.SellPrice:f2}$",
+                DateBought = e.DateBought,
+                DateSold = e.DateSold,
+                Status = e.Status,
+                Profit = $"{e.Profit:f2}$",
+                ReturnPercent = $"{e.Return:f2}%",
             })
             .ToArray();
         }

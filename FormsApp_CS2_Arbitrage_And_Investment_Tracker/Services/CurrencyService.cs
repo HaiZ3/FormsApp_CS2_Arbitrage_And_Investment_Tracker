@@ -4,10 +4,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.DTOs;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Net.Http.Json;
-using System.Text;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 {
@@ -25,10 +22,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             _httpClient.BaseAddress = new Uri("https://api.exchangerate-api.com/v4/latest/");
 
             CurrencyInfo? lastCurrencyInfoUpdate = _context.CurrencyInfos.FirstOrDefault();
-
-            if(lastCurrencyInfoUpdate.LastUpdate.Date == DateTime.UtcNow.Date)
+            if (lastCurrencyInfoUpdate != null)
             {
-                return ServiceResult.Fail("Conversion rates are up to date");
+                if (lastCurrencyInfoUpdate.LastUpdate.Date == DateTime.UtcNow.Date)
+                {
+                    return ServiceResult.Fail("Conversion rates are up to date");
+                }
             }
 
             _context.CurrencyInfos.RemoveRange(_context.CurrencyInfos);
@@ -104,7 +103,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 
             return ServiceResult.Ok();
         }
-        public async Task<ServiceResultGeneric<decimal>> ConvertCurrencyAsync(string fromCurrency,string toCurrency,decimal amount)
+        public async Task<ServiceResultGeneric<decimal>> ConvertCurrencyAsync(string fromCurrency, string toCurrency, decimal amount)
         {
             CurrencyInfo? currencyInfo = await _context.CurrencyInfos
                 .FirstOrDefaultAsync(x => x.FromCurrency == fromCurrency && x.ToCurrency == toCurrency);

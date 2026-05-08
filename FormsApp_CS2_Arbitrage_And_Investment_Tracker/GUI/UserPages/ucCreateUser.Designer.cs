@@ -123,7 +123,7 @@
             Controls.Add(label1);
             Controls.Add(textBox1);
             Name = "ucCreateUser";
-            Size = new Size(900, 600);
+            Size = new Size(1050, 600);
             Load += ucCreateUser_Load;
             ResumeLayout(false);
             PerformLayout();

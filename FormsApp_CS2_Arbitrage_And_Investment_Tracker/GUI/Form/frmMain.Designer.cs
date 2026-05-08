@@ -37,7 +37,7 @@
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(0, 0);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(884, 561);
+            panelContent.Size = new Size(1034, 561);
             panelContent.TabIndex = 0;
             panelContent.Paint += panelContent_Paint;
             // 
@@ -45,7 +45,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(884, 561);
+            ClientSize = new Size(1034, 561);
             Controls.Add(panelContent);
             Name = "frmMain";
             Text = "Form1";

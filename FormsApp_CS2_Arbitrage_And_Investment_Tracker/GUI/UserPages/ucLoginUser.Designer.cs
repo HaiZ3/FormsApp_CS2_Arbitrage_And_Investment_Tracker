@@ -103,7 +103,7 @@
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Name = "ucLoginUser";
-            Size = new Size(900, 600);
+            Size = new Size(1050, 600);
             Load += ucLoginUser_Load;
             ResumeLayout(false);
             PerformLayout();
