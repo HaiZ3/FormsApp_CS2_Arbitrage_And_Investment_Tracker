@@ -41,7 +41,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.CurrencyConverter
 
             decimal amount = decimal.Parse(textBox1.Text);
 
-            ServiceResultGeneric<decimal> res = await _currencyService.GetCurrencyInfo(fromCurrency, toCurrency, amount);
+            ServiceResultGeneric<decimal> res = await _currencyService.ConvertCurrencyAsync(fromCurrency, toCurrency, amount);
 
             if (!res.Success)
             {
@@ -58,7 +58,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.CurrencyConverter
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            ServiceResult res = await _currencyService.FetchCurrencyInfoAndSaveRates();
+            ServiceResult res = await _currencyService.FetchCurrencyInfoAndSaveRatesAsync();
             if (!res.Success)
             {
                 MessageBox.Show(res.ErrorMessage);

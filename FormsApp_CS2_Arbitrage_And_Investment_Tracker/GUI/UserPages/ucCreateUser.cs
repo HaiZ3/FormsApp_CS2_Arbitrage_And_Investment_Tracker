@@ -42,7 +42,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
             string password = textBox3.Text;
 
             //create the user
-            ServiceResult serviceResult = await _userService.CreateUser(username, email, password);
+            ServiceResult serviceResult = await _userService.CreateUserAsync(username, email, password);
             if(serviceResult.Success == true)
             {
                 MessageBox.Show("Created the acount succesffully!");

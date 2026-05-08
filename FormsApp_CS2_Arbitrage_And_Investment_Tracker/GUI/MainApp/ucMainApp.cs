@@ -50,7 +50,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
         {
             int sheetId = (int)comboBox1.SelectedValue;
 
-            ServiceResultGeneric<Sheet> result = await _sheetService.GetSheetById(sheetId);
+            ServiceResultGeneric<Sheet> result = await _sheetService.GetSheetByIdAsync(sheetId);
             if (result.Success == false)
             {
                 MessageBox.Show(result.ErrorMessage);
@@ -65,14 +65,15 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
             EntryDisplayDto[] dgvSource = result.Data.Entries.Select(e => new EntryDisplayDto
             {
-                Id = e.Id,
                 Name = e.Name,
                 Quantity = e.Quantity,
                 BuyPrice = e.BuyPrice,
                 SellPrice = e.SellPrice,
                 DateBought = e.DateBought,
                 DateSold = e.DateSold,
-                Status = e.Status
+                Status = e.Status,
+                Profit = e.Profit,
+                Return = e.Return,
             }).ToArray();
 
             dataGridView1.DataSource = dgvSource;
@@ -80,7 +81,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
         private async void ucMainApp_Load(object sender, EventArgs e)
         {
-            ServiceResultGeneric<ICollection<Sheet>> sheetLoader = await _sheetService.LoadSheets(UserSession.UserId);
+            ServiceResultGeneric<ICollection<Sheet>> sheetLoader = await _sheetService.LoadSheetsAsync(UserSession.UserId);
             if (!sheetLoader.Success)
             {
                 MessageBox.Show(sheetLoader.ErrorMessage);

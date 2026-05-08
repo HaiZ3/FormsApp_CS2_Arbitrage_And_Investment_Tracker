@@ -55,6 +55,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
             Return = @return;
             DailyReturn = dailyReturn;
             Status = status;
+            Profit = sellPrice - buyPrice;
         }
         [Key]
         public int Id { get; set; }
@@ -70,9 +71,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         public int? HoldDays { get; set; }
         public decimal? Return { get; set; }
         public decimal? DailyReturn { get; set; }
-
+        public decimal? MarketPrice { get; set; }
         //After the sale is confirmed add the hold days to OverallStats
-
+        public decimal? Profit { get; set; }
         public decimal BuyPrice { get; set; }
         public decimal? SellPrice { get; set; }
         public int SheetId { get; set; }

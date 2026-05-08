@@ -38,7 +38,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
             string username = textBox1.Text;
             string passwordHash = textBox2.Text;
 
-            ServiceResult succesfullLogin = await _userService.LoginUser(username, passwordHash);
+            ServiceResult succesfullLogin = await _userService.LoginUserAsync(username, passwordHash);
 
             if (this.ParentForm is frmMain mainForm && succesfullLogin.Success == true)
             {

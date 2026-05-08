@@ -19,7 +19,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         {
             this._context = context;
         }
-        public async Task<ServiceResult> CreateUser(string username,string email ,string password)
+        public async Task<ServiceResult> CreateUserAsync(string username,string email ,string password)
         {
             //check if a user with the same username exists
             if(await _context.Users.AnyAsync(u => u.Username == username))
@@ -37,7 +37,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             return ServiceResult.Ok();
         }
 
-        public async Task<ServiceResult> LoginUser(string username,string password)
+        public async Task<ServiceResult> LoginUserAsync(string username,string password)
         {
             //get the user
             User? user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);

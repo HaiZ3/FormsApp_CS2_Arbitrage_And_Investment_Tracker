@@ -4,6 +4,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
 {
     [DbContext(typeof(CS2TrackerContext))]
-    partial class CS2TrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20260508075111_AddedTheMarketPriceForEntries")]
+    partial class AddedTheMarketPriceForEntries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,10 +95,6 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<decimal?>("Profit")
-                        .HasPrecision(18, 4)
-                        .HasColumnType("decimal(18,4)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

@@ -67,7 +67,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
 
         private async void ucAddEntry_Load(object sender, EventArgs e)
         {
-            var result = await _sheetService.LoadSheets(UserSession.UserId);
+            var result = await _sheetService.LoadSheetsAsync(UserSession.UserId);
             if (!result.Success)
             {
                 MessageBox.Show("Failed to load sheets.");
@@ -99,7 +99,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             int sheetId = (int)comboBox3.SelectedValue;
             decimal buyPrice = numericUpDown3.Value;
 
-            var res = await _entryService.AddEntry(sheetId, name, quantity
+            var res = await _entryService.AddEntryAsync(sheetId, name, quantity
                 , buyTime, null, buyPrice, null, itemFloat, skinCondition, skinVariant);
 
             if (res.Success == false)
@@ -129,7 +129,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
         {
             int sheetId = (int)comboBox3.SelectedValue;
 
-            ServiceResultGeneric<int[]> res = await _entryService.ImportFromCsvToSheet(sheetId);
+            ServiceResultGeneric<int[]> res = await _entryService.ImportFromCsvToSheetAsync(sheetId);
 
             if (res.Success)
             {

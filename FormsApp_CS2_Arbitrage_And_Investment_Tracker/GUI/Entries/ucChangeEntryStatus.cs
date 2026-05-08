@@ -51,7 +51,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
 
         private async void ucChangeEntryStatus_Load(object sender, EventArgs e)
         {
-            ServiceResultGeneric<ICollection<Sheet>> res = await _sheetService.LoadSheets(UserSession.UserId);
+            ServiceResultGeneric<ICollection<Sheet>> res = await _sheetService.LoadSheetsAsync(UserSession.UserId);
             if (!res.Success)
             {
                 MessageBox.Show(res.ErrorMessage);
@@ -72,14 +72,13 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
         private async void button3_Click(object sender, EventArgs e)
         {
             int sheetId = (int)comboBox2.SelectedValue;
-            ServiceResultGeneric<ICollection<Entry>> res = await _entryService.GetEntriesBySheet(sheetId);
+            ServiceResultGeneric<ICollection<Entry>> res = await _entryService.GetEntriesBySheetAsync(sheetId);
             if (!res.Success)
             {
                 MessageBox.Show(res.ErrorMessage);
             }
             dataGridView1.DataSource = res.Data.Where(x => x.Status == EntryStatus.Open).Select(x => new EntryDisplayDto
             {
-                Id = x.Id,
                 Name = x.Name,
                 BuyPrice = x.BuyPrice,
                 Status = x.Status,
@@ -112,7 +111,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
 
             if(newStatus == EntryStatus.Closed)
             {
-                ServiceResult res = await _entryService.CloseEntry(entryId, dateSold, sellPrice);
+                ServiceResult res = await _entryService.CloseEntryAsync(entryId, dateSold, sellPrice);
                 if (!res.Success)
                 {
                     MessageBox.Show(res.ErrorMessage);
@@ -124,7 +123,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             }
             if (newStatus == EntryStatus.Cancelled)
             {
-                ServiceResult res = await _entryService.CancelEntry(entryId);
+                ServiceResult res = await _entryService.CancelEntryAsync(entryId);
                 if (!res.Success)
                 {
                     MessageBox.Show(res.ErrorMessage);

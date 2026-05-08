@@ -10,8 +10,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices
 {
     public interface ISheetService
     {
-        public Task<ServiceResultGeneric<ICollection<Sheet>>> LoadSheets(int userId);
-        public Task<ServiceResult> CreateSheet(int userId, string name, SheetType sheetType);
-        public Task<ServiceResultGeneric<Sheet>> GetSheetById(int sheetId);
+        public Task<ServiceResultGeneric<ICollection<Sheet>>> LoadSheetsAsync(int userId);
+        public Task<ServiceResult> CreateSheetAsync(int userId, string name, SheetType sheetType);
+        public Task<ServiceResultGeneric<Sheet>> GetSheetByIdAsync(int sheetId);
     }
 }

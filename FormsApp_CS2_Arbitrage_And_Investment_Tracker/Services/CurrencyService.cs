@@ -20,7 +20,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             _httpClient = httpClient;
             _context = context;
         }
-        public async Task<ServiceResult> FetchCurrencyInfoAndSaveRates()
+        public async Task<ServiceResult> FetchCurrencyInfoAndSaveRatesAsync()
         {
             _httpClient.BaseAddress = new Uri("https://api.exchangerate-api.com/v4/latest/");
 
@@ -104,7 +104,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 
             return ServiceResult.Ok();
         }
-        public async Task<ServiceResultGeneric<decimal>> GetCurrencyInfo(string fromCurrency,string toCurrency,decimal amount)
+        public async Task<ServiceResultGeneric<decimal>> ConvertCurrencyAsync(string fromCurrency,string toCurrency,decimal amount)
         {
             CurrencyInfo? currencyInfo = await _context.CurrencyInfos
                 .FirstOrDefaultAsync(x => x.FromCurrency == fromCurrency && x.ToCurrency == toCurrency);

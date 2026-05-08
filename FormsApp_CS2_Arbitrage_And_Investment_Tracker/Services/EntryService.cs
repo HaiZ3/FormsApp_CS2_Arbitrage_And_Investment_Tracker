@@ -15,14 +15,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
     public class EntryService : IEntryService
     {
         private CS2TrackerContext _context;
-        private ISheetService _sheetService;
-        public EntryService(CS2TrackerContext context, ISheetService sheetService)
+        public EntryService(CS2TrackerContext context)
         {
             _context = context;
-            _sheetService = sheetService;
         }
 
-        public async Task<ServiceResult> AddEntry(int sheetId, string entryName, int quantity
+        public async Task<ServiceResult> AddEntryAsync(int sheetId, string entryName, int quantity
             , DateTime dateBought, DateTime? dateSold, decimal buyPrice, decimal? sellPrice, decimal? itemFloat
             , SkinCondition? skinCondition, SkinVariant skinVariant)
         {
@@ -40,7 +38,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 
             return ServiceResult.Ok();
         }
-        public async Task<ServiceResultGeneric<ICollection<Entry>>> GetEntriesBySheet(int sheetId)
+        public async Task<ServiceResultGeneric<ICollection<Entry>>> GetEntriesBySheetAsync(int sheetId)
         {
             ICollection<Entry>? entries = await _context.Entries
                 .Where(e => e.SheetId == sheetId)
@@ -55,7 +53,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
                 return ServiceResultGeneric<ICollection<Entry>>.Ok(entries);
             }
         }
-        public async Task<ServiceResult> CloseEntry(int entryId, DateTime dateSold, decimal sellPrice)
+        public async Task<ServiceResult> CloseEntryAsync(int entryId, DateTime dateSold, decimal sellPrice)
         {
             Entry? entry = await _context.Entries.FirstOrDefaultAsync(e => e.Id == entryId);
 
@@ -72,12 +70,13 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
                 entry.DateSold = dateSold;
                 entry.SellPrice = sellPrice;
                 entry.Status = EntryStatus.Closed;
+                entry.Profit = sellPrice - entry.BuyPrice;
                 _context.Update(entry);
                 await _context.SaveChangesAsync();
                 return ServiceResult.Ok();
             }
         }
-        public async Task<ServiceResult> CancelEntry(int entryId)
+        public async Task<ServiceResult> CancelEntryAsync(int entryId)
         {
             Entry? entry = await _context.Entries.FirstOrDefaultAsync(e => e.Id == entryId);
             if (entry == null)
@@ -92,7 +91,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
                 return ServiceResult.Ok();
             }
         }
-        public async Task<ServiceResultGeneric<int[]>> ImportFromCsvToSheet(int sheetId)
+        public async Task<ServiceResultGeneric<int[]>> ImportFromCsvToSheetAsync(int sheetId)
         {
             string filePath =
                 @"C:\Users\406\source\repos\HaiZ3\FormsApp_CS2_Arbitrage_And_Investment_Tracker\FormsApp_CS2_Arbitrage_And_Investment_Tracker\CSVs\Skins_v2.csv";
@@ -128,6 +127,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
                         , skinInfo, EntryDataSource.Legacy, record.Return, record.DailyReturn, EntryStatus.Closed);
 
                     entry.SheetId = sheetId;
+                    entry.Profit = entry.SellPrice - entry.BuyPrice;
 
                     _context.Entries.Add(entry);
                     recordsData[1]++;

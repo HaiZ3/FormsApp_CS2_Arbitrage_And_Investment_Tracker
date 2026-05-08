@@ -35,7 +35,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
             string sheetName = textBox1.Text;
             SheetType sheetType = (SheetType)comboBox1.SelectedItem;
 
-            ServiceResult isSheetCreated = await _sheetService.CreateSheet(UserSession.UserId, sheetName, sheetType);
+            ServiceResult isSheetCreated = await _sheetService.CreateSheetAsync(UserSession.UserId, sheetName, sheetType);
 
             if (!isSheetCreated.Success)
             {

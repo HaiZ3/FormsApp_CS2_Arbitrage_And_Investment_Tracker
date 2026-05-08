@@ -16,7 +16,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         {
             _context = context;
         }
-        public async Task<ServiceResult> CreateSheet(int userId, string name, SheetType sheetType)
+        public async Task<ServiceResult> CreateSheetAsync(int userId, string name, SheetType sheetType)
         {
             Sheet sheet = new Sheet(userId, name, sheetType);
 
@@ -29,7 +29,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             return ServiceResult.Ok();
         }
         
-        public async Task<ServiceResultGeneric<ICollection<Sheet>>> LoadSheets(int userId)
+        public async Task<ServiceResultGeneric<ICollection<Sheet>>> LoadSheetsAsync(int userId)
         {
             ICollection<Sheet>? sheets = _context.Sheets.Where(s => s.UserId == userId).ToList();
             if(sheets is null || sheets.Count == 0)
@@ -39,7 +39,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             return ServiceResultGeneric<ICollection<Sheet>>.Ok(sheets);
         }
 
-        public async Task<ServiceResultGeneric<Sheet>> GetSheetById(int sheetId)
+        public async Task<ServiceResultGeneric<Sheet>> GetSheetByIdAsync(int sheetId)
         {
             Sheet? sheet = await _context.Sheets
                 .Include(s => s.Entries)
