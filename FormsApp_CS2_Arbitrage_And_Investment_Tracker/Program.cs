@@ -1,4 +1,5 @@
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.CurrencyConverter;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols;
@@ -37,7 +38,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
             services.AddHttpClient<ICurrencyService, CurrencyService>();
 
 
-            services.AddScoped<Form1>();
+            services.AddScoped<frmMain>();
+            services.AddScoped<frmCurrencyConverter>();
+
             services.AddScoped<ucCreateUser>();
             services.AddScoped<ucLoginUser>();
             services.AddScoped<ucMainApp>();
@@ -51,7 +54,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
 
 
 
-            Application.Run(ServiceProvider.GetRequiredService<Form1>());
+            Application.Run(ServiceProvider.GetRequiredService<frmMain>());
         }
     }
 }

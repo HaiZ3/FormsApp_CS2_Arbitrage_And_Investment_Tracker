@@ -63,7 +63,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (this.ParentForm is Form1 mainForm)
+            if (this.ParentForm is frmMain mainForm)
             {
                 mainForm.LoadUserControl<ucMainApp>();
             }

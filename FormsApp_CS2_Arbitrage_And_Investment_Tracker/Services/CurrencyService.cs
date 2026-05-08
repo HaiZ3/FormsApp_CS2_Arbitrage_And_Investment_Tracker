@@ -3,6 +3,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.DTOs;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Json;
@@ -14,14 +15,23 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
     {
         HttpClient _httpClient;
         CS2TrackerContext _context;
-        public CurrencyService(HttpClient httpClient,CS2TrackerContext context)
+        public CurrencyService(HttpClient httpClient, CS2TrackerContext context)
         {
             _httpClient = httpClient;
             _context = context;
         }
-        public async Task FetchCurrencyInfoAndSaveRates()
+        public async Task<ServiceResult> FetchCurrencyInfoAndSaveRates()
         {
             _httpClient.BaseAddress = new Uri("https://api.exchangerate-api.com/v4/latest/");
+
+            CurrencyInfo? lastCurrencyInfoUpdate = _context.CurrencyInfos.FirstOrDefault();
+
+            if(lastCurrencyInfoUpdate.LastUpdate.Date == DateTime.UtcNow.Date)
+            {
+                return ServiceResult.Fail("Conversion rates are up to date");
+            }
+
+            _context.CurrencyInfos.RemoveRange(_context.CurrencyInfos);
 
             const string usd = "USD";
             const string eur = "EUR";
@@ -91,14 +101,24 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             _context.CurrencyInfos.Add(currencyInfoCnyToEur);
 
             await _context.SaveChangesAsync();
+
+            return ServiceResult.Ok();
         }
-        public async Task RefreshRatesAsync()
+        public async Task<ServiceResultGeneric<decimal>> GetCurrencyInfo(string fromCurrency,string toCurrency,decimal amount)
         {
-            _context.CurrencyInfos.RemoveRange(_context.CurrencyInfos);
+            CurrencyInfo? currencyInfo = await _context.CurrencyInfos
+                .FirstOrDefaultAsync(x => x.FromCurrency == fromCurrency && x.ToCurrency == toCurrency);
+            if (currencyInfo == null)
+            {
+                return ServiceResultGeneric<decimal>.Fail("Fetch the currency rates again");
+            }
 
-            await _context.SaveChangesAsync();
+            decimal rate = currencyInfo.ConversionRate;
 
-            await FetchCurrencyInfoAndSaveRates();            
+            decimal result = amount * rate;
+
+            return ServiceResultGeneric<decimal>.Ok(result);
+
         }
     }
 }

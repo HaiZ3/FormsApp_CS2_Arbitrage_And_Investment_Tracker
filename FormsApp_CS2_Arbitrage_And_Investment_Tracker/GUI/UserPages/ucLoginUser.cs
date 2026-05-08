@@ -40,7 +40,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
 
             ServiceResult succesfullLogin = await _userService.LoginUser(username, passwordHash);
 
-            if (this.ParentForm is Form1 mainForm && succesfullLogin.Success == true)
+            if (this.ParentForm is frmMain mainForm && succesfullLogin.Success == true)
             {
                 MessageBox.Show("Succesfful Login!");
                 mainForm.LoginSuccessful();   // Switch to main app
@@ -54,7 +54,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
         private void createBtn_Click(object sender, EventArgs e)
         {
             // Get reference to parent Form1 and load Create Account screen
-            if (this.ParentForm is Form1 mainForm)
+            if (this.ParentForm is frmMain mainForm)
             {
                 mainForm.LoadUserControl<ucCreateUser>();
             }

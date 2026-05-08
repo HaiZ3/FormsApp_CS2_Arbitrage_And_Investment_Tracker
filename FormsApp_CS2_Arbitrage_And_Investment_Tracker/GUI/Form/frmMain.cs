@@ -9,12 +9,12 @@ using System.Windows.Forms;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ISheetService _sheetService;
 
-        public Form1(IServiceProvider serviceProvider, ISheetService sheetService)
+        public frmMain(IServiceProvider serviceProvider, ISheetService sheetService)
         {
             _serviceProvider = serviceProvider;
             _sheetService = sheetService;
@@ -43,6 +43,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
         }
 
         private void panelContent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
 
         }

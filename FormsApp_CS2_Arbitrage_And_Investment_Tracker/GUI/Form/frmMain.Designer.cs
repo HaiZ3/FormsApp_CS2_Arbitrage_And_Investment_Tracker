@@ -1,6 +1,6 @@
 ﻿namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -41,13 +41,13 @@
             panelContent.TabIndex = 0;
             panelContent.Paint += panelContent_Paint;
             // 
-            // Form1
+            // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(884, 561);
             Controls.Add(panelContent);
-            Name = "Form1";
+            Name = "frmMain";
             Text = "Form1";
             Load += Form1_Load;
             ResumeLayout(false);

@@ -35,6 +35,7 @@
             comboBox1 = new ComboBox();
             button1 = new Button();
             button4 = new Button();
+            button5 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -43,7 +44,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13F);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(402, 10);
+            label1.Location = new Point(471, 10);
             label1.Name = "label1";
             label1.Size = new Size(90, 25);
             label1.TabIndex = 0;
@@ -74,13 +75,13 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(27, 38);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(837, 384);
+            dataGridView1.Size = new Size(994, 384);
             dataGridView1.TabIndex = 4;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(319, 468);
+            comboBox1.Location = new Point(254, 468);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(190, 23);
             comboBox1.TabIndex = 5;
@@ -107,11 +108,22 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
+            // button5
+            // 
+            button5.Location = new Point(862, 497);
+            button5.Name = "button5";
+            button5.Size = new Size(170, 63);
+            button5.TabIndex = 8;
+            button5.Text = "Currency converter";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // ucMainApp
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
+            Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button1);
             Controls.Add(comboBox1);
@@ -120,7 +132,7 @@
             Controls.Add(button2);
             Controls.Add(label1);
             Name = "ucMainApp";
-            Size = new Size(900, 600);
+            Size = new Size(1050, 600);
             Load += ucMainApp_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
@@ -136,5 +148,6 @@
         private ComboBox comboBox1;
         private Button button1;
         private Button button4;
+        private Button button5;
     }
 }

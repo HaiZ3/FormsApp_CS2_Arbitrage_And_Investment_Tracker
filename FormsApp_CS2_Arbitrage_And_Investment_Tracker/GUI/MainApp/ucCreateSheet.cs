@@ -45,7 +45,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
             MessageBox.Show("Successfully created the sheet");
 
-            if (this.ParentForm is Form1 mainForm)
+            if (this.ParentForm is frmMain mainForm)
             {
                 mainForm.LoadUserControl<ucMainApp>();
             }
@@ -57,7 +57,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (this.ParentForm is Form1 mainForm)
+            if (this.ParentForm is frmMain mainForm)
             {
                 mainForm.LoadUserControl<ucMainApp>();
             }
