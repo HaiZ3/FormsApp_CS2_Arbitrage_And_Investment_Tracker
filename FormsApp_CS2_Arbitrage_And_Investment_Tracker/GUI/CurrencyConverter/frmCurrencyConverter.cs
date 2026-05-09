@@ -16,13 +16,16 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.CurrencyConverter
     public partial class frmCurrencyConverter : Form
     {
         private ICurrencyService _currencyService;
+        private List<string> _currenices = new List<string>() { "USD","CNY","EUR"};
         public frmCurrencyConverter(ICurrencyService currencyService)
         {
             InitializeComponent();
+            this.Icon = new Icon("Resources/CS2Tracker_logo.ico");
             _currencyService = currencyService;
             Styler.StyleButton(button1, "Convert");
             Styler.StyleButton(button2, "Refresh Rates");
             Styler.StyleButton(button3, "Close the converter");
+            Styler.StyleButton(button4, "Swap currencies");
             BackColor = Color.FromArgb(37, 37, 38);
             this.ControlBox = false;
 
@@ -52,7 +55,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.CurrencyConverter
         }
         private void frmCurrencyConverter_Load(object sender, EventArgs e)
         {
-
+            comboBox1.DataSource = _currenices.ToList();
+            comboBox2.DataSource = _currenices.ToList();
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -69,6 +73,17 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.CurrencyConverter
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var tempFrom = comboBox1.SelectedItem;
+            comboBox1.SelectedItem = comboBox2.SelectedItem;
+            comboBox2.SelectedItem = tempFrom;
+
+            var tempAmount = textBox1.Text;
+            textBox1.Text = textBox2.Text;
+            textBox2.Text = tempAmount;
         }
     }
 }

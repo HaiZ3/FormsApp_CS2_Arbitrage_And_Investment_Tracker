@@ -16,6 +16,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
 
         public frmMain(IServiceProvider serviceProvider, ISheetService sheetService)
         {
+            this.Icon = new Icon("Resources/CS2Tracker_logo.ico");
             _serviceProvider = serviceProvider;
             _sheetService = sheetService;
             InitializeComponent();

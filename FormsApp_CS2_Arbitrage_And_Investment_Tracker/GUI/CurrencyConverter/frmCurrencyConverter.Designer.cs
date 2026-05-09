@@ -37,13 +37,13 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
+            button4 = new Button();
             SuspendLayout();
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "USD", "CNY", "EUR" });
-            comboBox1.Location = new Point(353, 185);
+            comboBox1.Location = new Point(74, 142);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(190, 23);
             comboBox1.TabIndex = 0;
@@ -51,8 +51,7 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "USD", "CNY", "EUR" });
-            comboBox2.Location = new Point(353, 297);
+            comboBox2.Location = new Point(74, 254);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(190, 23);
             comboBox2.TabIndex = 1;
@@ -61,7 +60,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(401, 167);
+            label1.Location = new Point(122, 124);
             label1.Name = "label1";
             label1.Size = new Size(86, 15);
             label1.TabIndex = 2;
@@ -71,7 +70,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(401, 279);
+            label2.Location = new Point(122, 236);
             label2.Name = "label2";
             label2.Size = new Size(70, 15);
             label2.TabIndex = 3;
@@ -80,21 +79,21 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(353, 235);
+            textBox1.Location = new Point(74, 192);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(190, 23);
             textBox1.TabIndex = 4;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(353, 346);
+            textBox2.Location = new Point(74, 303);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(190, 23);
             textBox2.TabIndex = 5;
             // 
             // button1
             // 
-            button1.Location = new Point(353, 395);
+            button1.Location = new Point(74, 352);
             button1.Name = "button1";
             button1.Size = new Size(190, 51);
             button1.TabIndex = 9;
@@ -104,7 +103,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(353, 469);
+            button2.Location = new Point(74, 426);
             button2.Name = "button2";
             button2.Size = new Size(190, 51);
             button2.TabIndex = 10;
@@ -114,7 +113,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(353, 65);
+            button3.Location = new Point(74, 34);
             button3.Name = "button3";
             button3.Size = new Size(190, 51);
             button3.TabIndex = 11;
@@ -122,12 +121,23 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // button4
+            // 
+            button4.Location = new Point(74, 493);
+            button4.Name = "button4";
+            button4.Size = new Size(190, 51);
+            button4.TabIndex = 12;
+            button4.Text = "Swap currencies";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // frmCurrencyConverter
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
-            ClientSize = new Size(1034, 561);
+            ClientSize = new Size(334, 556);
+            Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -155,5 +165,6 @@
         private Button button1;
         private Button button2;
         private Button button3;
+        private Button button4;
     }
 }
