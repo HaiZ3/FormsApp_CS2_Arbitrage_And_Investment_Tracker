@@ -43,6 +43,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         {
             Sheet? sheet = await _context.Sheets
                 .Include(s => s.Entries)
+                .ThenInclude(s => s.SkinInfo)
                 .FirstOrDefaultAsync(s => s.Id == sheetId);
             if(sheet == null)
             {

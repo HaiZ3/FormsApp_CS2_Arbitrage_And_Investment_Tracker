@@ -36,6 +36,7 @@
             button1 = new Button();
             button4 = new Button();
             button5 = new Button();
+            button6 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -52,7 +53,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(254, 497);
+            button2.Location = new Point(255, 520);
             button2.Name = "button2";
             button2.Size = new Size(190, 63);
             button2.TabIndex = 2;
@@ -62,7 +63,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(27, 497);
+            button3.Location = new Point(28, 520);
             button3.Name = "button3";
             button3.Size = new Size(190, 63);
             button3.TabIndex = 3;
@@ -81,7 +82,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(254, 468);
+            comboBox1.Location = new Point(255, 491);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(190, 23);
             comboBox1.TabIndex = 5;
@@ -89,7 +90,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(471, 497);
+            button1.Location = new Point(472, 520);
             button1.Name = "button1";
             button1.Size = new Size(170, 63);
             button1.TabIndex = 6;
@@ -100,7 +101,7 @@
             // button4
             // 
             button4.ForeColor = SystemColors.ControlText;
-            button4.Location = new Point(664, 497);
+            button4.Location = new Point(665, 520);
             button4.Name = "button4";
             button4.Size = new Size(170, 63);
             button4.TabIndex = 7;
@@ -110,7 +111,7 @@
             // 
             // button5
             // 
-            button5.Location = new Point(862, 497);
+            button5.Location = new Point(863, 520);
             button5.Name = "button5";
             button5.Size = new Size(170, 63);
             button5.TabIndex = 8;
@@ -118,11 +119,22 @@
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
+            // button6
+            // 
+            button6.Location = new Point(472, 437);
+            button6.Name = "button6";
+            button6.Size = new Size(263, 64);
+            button6.TabIndex = 9;
+            button6.Text = "Refresh open entries market info";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
             // ucMainApp
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
+            Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button1);
@@ -149,5 +161,6 @@
         private Button button1;
         private Button button4;
         private Button button5;
+        private Button button6;
     }
 }

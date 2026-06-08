@@ -21,7 +21,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         {
             _httpClient.BaseAddress = new Uri("https://api.exchangerate-api.com/v4/latest/");
 
-            CurrencyInfo? lastCurrencyInfoUpdate = _context.CurrencyInfos.FirstOrDefault();
+            CurrencyInfo? lastCurrencyInfoUpdate = await _context.CurrencyInfos.FirstOrDefaultAsync();
             if (lastCurrencyInfoUpdate != null)
             {
                 if (lastCurrencyInfoUpdate.LastUpdate.Date == DateTime.UtcNow.Date)
@@ -36,9 +36,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             const string eur = "EUR";
             const string cny = "CNY";
 
-            var usdInfo = _httpClient.GetFromJsonAsync<CurrencyInfoDto>(_httpClient.BaseAddress + usd).Result;
-            var eurInfo = _httpClient.GetFromJsonAsync<CurrencyInfoDto>(_httpClient.BaseAddress + eur).Result;
-            var cnyInfo = _httpClient.GetFromJsonAsync<CurrencyInfoDto>(_httpClient.BaseAddress + cny).Result;
+            var usdInfo = await _httpClient.GetFromJsonAsync<CurrencyInfoDto>(_httpClient.BaseAddress + usd);
+            var eurInfo = await _httpClient.GetFromJsonAsync<CurrencyInfoDto>(_httpClient.BaseAddress + eur);
+            var cnyInfo = await _httpClient.GetFromJsonAsync<CurrencyInfoDto>(_httpClient.BaseAddress + cny);
 
             DateTime lastUpdate = usdInfo.Date;
 

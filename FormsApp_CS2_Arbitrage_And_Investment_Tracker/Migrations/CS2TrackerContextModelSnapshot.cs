@@ -104,6 +104,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Migrations
                         .HasPrecision(18, 4)
                         .HasColumnType("decimal(18,4)");
 
+                    b.Property<decimal>("SellOrderPice")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
+
                     b.Property<decimal?>("SellPrice")
                         .HasPrecision(18, 4)
                         .HasColumnType("decimal(18,4)");

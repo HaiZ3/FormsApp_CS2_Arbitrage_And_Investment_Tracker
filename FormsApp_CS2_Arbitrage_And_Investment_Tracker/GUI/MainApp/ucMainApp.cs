@@ -3,6 +3,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.CurrencyConverter;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.DTOs;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Session;
@@ -17,18 +18,22 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
         private IEntryService _entryService;
         private frmCurrencyConverter _currencyForm;
         private readonly IServiceProvider _serviceProvider;
+        private ICSFloatService _csFloatService;
+        
 
-        public ucMainApp(ISheetService sheetService, IEntryService entryService, IServiceProvider serviceProvider)
+        public ucMainApp(ISheetService sheetService, IEntryService entryService, IServiceProvider serviceProvider,ICSFloatService csFloatService)
         {
             InitializeComponent();
             _sheetService = sheetService;
             _entryService = entryService;
             _serviceProvider = serviceProvider;
+            _csFloatService = csFloatService;
             Styler.StyleButton(button1, "Add Entry");
             Styler.StyleButton(button2, "Load an existing sheet");
             Styler.StyleButton(button3, "Create a new Sheet");
             Styler.StyleButton(button4, "Close an entry");
             Styler.StyleButton(button5, "Currency Converter");
+            Styler.StyleButton(button6, "Refresh entries sell order price(CsFloat)");
             Styler.StyleDataGridView(dataGridView1);
             BackColor = Color.FromArgb(37, 37, 38);
         }
@@ -90,6 +95,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
                 Status = e.Status,
                 Profit = $"{e.Profit:f2}$",
                 ReturnPercent = $"{e.Return:f2}%",
+                LowestSellOrder = $"{e.SellOrderPice:f2}$",
             }).OrderBy(x => x.Status).ToArray();
 
             dataGridView1.DataSource = dgvSource;
@@ -127,6 +133,53 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
         {
             var form = _serviceProvider.GetRequiredService<frmCurrencyConverter>();
             form.Show();
+        }
+
+        private async void button6_Click(object sender, EventArgs e)
+        {
+            int? sheetId = (int?)comboBox1.SelectedValue;
+
+            ServiceResultGeneric<Sheet> result = await _sheetService.GetSheetByIdAsync(sheetId);
+            if (result.Success == false)
+            {
+                MessageBox.Show(result.ErrorMessage);
+                return;
+            }
+
+            if (result.Data.Entries == null || result.Data.Entries.Count == 0)
+            {
+                MessageBox.Show("No entries found for this sheet.");
+                return;
+            }
+
+            Entry[] openEntries = result.Data.Entries.Where(e => e.Status == Enums.EntryStatus.Open).ToArray();
+
+            ServiceResult refreshLowestSellOrderPriceResult = await _csFloatService.RefreshEntriesSellOrderPrices(openEntries);
+
+            if (!refreshLowestSellOrderPriceResult.Success)
+            {
+                MessageBox.Show(refreshLowestSellOrderPriceResult.ErrorMessage);
+                return;
+            }
+
+            EntryDisplayDto[] dgvSource = result.Data.Entries.Select(e => new EntryDisplayDto
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Quantity = e.Quantity,
+                BuyPrice = $"{e.BuyPrice:f2}$",
+                SellPrice = $"{e.SellPrice:f2}$",
+                DateBought = e.DateBought,
+                DateSold = e.DateSold,
+                Status = e.Status,
+                Profit = $"{e.Profit:f2}$",
+                ReturnPercent = $"{e.Return:f2}%",
+                LowestSellOrder = $"{e.SellOrderPice:f2}$",
+            }).OrderBy(x => x.Status).ToArray();
+
+            dataGridView1.DataSource = dgvSource;
+
+            MessageBox.Show("Refreshed the entries lowest sell order price");
         }
     }
 }

@@ -21,9 +21,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         {
             
         }
+        //Regular entry ctor
         public Entry(int quantity,DateTime? dateBought
             ,DateTime? dateSold,decimal buyPrice,decimal? sellPrice
-            ,int sheetId,SkinInfo skinInfo)
+            ,int sheetId,SkinInfo skinInfo,decimal sellOrderPrice)
         {
             Name = skinInfo.Name;
             Quantity = quantity;
@@ -36,7 +37,9 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
             Status = EntryStatus.Open;
             CreatedAt = DateTime.UtcNow;
             DataSource = EntryDataSource.Regular;
+            SellOrderPice = sellOrderPrice;
         }
+        //Legacy entry ctor
         public Entry(int quantity, DateTime? dateBought
     , DateTime? dateSold, decimal buyPrice, decimal? sellPrice
     , int sheetId, SkinInfo skinInfo,EntryDataSource dataSource,decimal @return, decimal dailyReturn,EntryStatus status)
@@ -80,5 +83,6 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         public Sheet Sheet { get; set; }
         public int SkinInfoId { get; set; }
         public SkinInfo SkinInfo { get; set; }
+        public decimal SellOrderPice { get; set; }
     }
 }

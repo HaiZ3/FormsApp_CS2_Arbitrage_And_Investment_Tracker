@@ -17,5 +17,6 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.DTOs
         public DateTime? DateBought { get; set; }
         public DateTime? DateSold { get; set; }
         public EntryStatus Status { get; set; }
+        public string LowestSellOrder { get; set; }
     }
 }

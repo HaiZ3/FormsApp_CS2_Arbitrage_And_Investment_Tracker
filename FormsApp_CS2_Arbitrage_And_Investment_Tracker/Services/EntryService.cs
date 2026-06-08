@@ -15,9 +15,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
     public class EntryService : IEntryService
     {
         private CS2TrackerContext _context;
-        public EntryService(CS2TrackerContext context)
+        private ICSFloatService _CSFloatService;
+        public EntryService(CS2TrackerContext context, ICSFloatService cSFloatService)
         {
             _context = context;
+            _CSFloatService = cSFloatService;
         }
 
         public async Task<ServiceResult> AddEntryAsync(int sheetId, string entryName, int quantity
@@ -30,7 +32,16 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             skinInfo.SetItemType();
             skinInfo.SetMarketHashName();
 
-            Entry entry = new Entry(quantity, dateBought, dateSold, buyPrice, sellPrice, sheetId, skinInfo);
+            ServiceResultGeneric<decimal> sellOrderPriceResult = await _CSFloatService.GetLowestPriceListingAsync(skinInfo.MarketHashName);
+
+            if (!sellOrderPriceResult.Success)
+            {
+                ServiceResult.Fail("Failed to set the lowest sell order price");
+            }
+
+            decimal sellOrderPrice = sellOrderPriceResult.Data;
+
+            Entry entry = new Entry(quantity, dateBought, dateSold, buyPrice, sellPrice, sheetId, skinInfo,sellOrderPrice);
             entry.DataSource = EntryDataSource.Regular;
 
             _context.Add(entry);

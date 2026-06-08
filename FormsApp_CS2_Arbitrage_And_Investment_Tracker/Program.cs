@@ -8,6 +8,7 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
 {
@@ -26,6 +27,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
 
             var services = new ServiceCollection();
 
+            services.AddSingleton<IConfiguration>(config);
+
             var connectionString = config.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<CS2TrackerContext>(options =>
@@ -35,6 +38,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker
             services.AddScoped<IEntryService, EntryService>();
             services.AddScoped<ISheetService, SheetService>();
 
+            services.AddHttpClient<ICSFloatService,CSFloatService>(); 
             services.AddHttpClient<ICurrencyService, CurrencyService>();
 
 
