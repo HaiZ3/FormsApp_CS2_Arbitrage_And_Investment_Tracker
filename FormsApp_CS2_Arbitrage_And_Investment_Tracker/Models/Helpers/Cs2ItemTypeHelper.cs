@@ -84,6 +84,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
                 };
             }
 
+            //pins
+            if (itemName.EndsWith("Pin"))
+            {
+                return ItemType.Pin;
+            }
+
             return ItemType.Unknown;
         }
 

@@ -71,6 +71,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
 
         private async void button3_Click(object sender, EventArgs e)
         {
+            await LoadEntriesDgv();
+        }
+
+        private async Task LoadEntriesDgv()
+        {
             int sheetId = (int)comboBox2.SelectedValue;
             ServiceResultGeneric<ICollection<Entry>> res = await _entryService.GetEntriesBySheetAsync(sheetId);
             if (!res.Success)
@@ -136,6 +141,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
                     MessageBox.Show("Entry cancelled successfully.");
                 }
             }
+            await LoadEntriesDgv();
         }
     }
 }

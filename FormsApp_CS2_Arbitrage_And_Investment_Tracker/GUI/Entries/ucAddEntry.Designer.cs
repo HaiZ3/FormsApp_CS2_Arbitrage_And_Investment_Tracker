@@ -48,6 +48,8 @@
             numericUpDown3 = new NumericUpDown();
             button2 = new Button();
             button3 = new Button();
+            comboBox4 = new ComboBox();
+            label10 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
@@ -164,7 +166,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(333, 493);
+            button1.Location = new Point(334, 533);
             button1.Name = "button1";
             button1.Size = new Size(200, 64);
             button1.TabIndex = 13;
@@ -217,7 +219,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(577, 493);
+            button2.Location = new Point(578, 533);
             button2.Name = "button2";
             button2.Size = new Size(200, 64);
             button2.TabIndex = 19;
@@ -227,7 +229,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(89, 493);
+            button3.Location = new Point(90, 533);
             button3.Name = "button3";
             button3.Size = new Size(200, 64);
             button3.TabIndex = 20;
@@ -235,11 +237,32 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // comboBox4
+            // 
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Location = new Point(333, 504);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(199, 23);
+            comboBox4.TabIndex = 21;
+            comboBox4.SelectedIndexChanged += comboBox4_SelectedIndexChanged;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.ForeColor = SystemColors.ButtonHighlight;
+            label10.Location = new Point(400, 486);
+            label10.Name = "label10";
+            label10.Size = new Size(58, 15);
+            label10.TabIndex = 22;
+            label10.Text = "Item Type";
+            // 
             // ucAddEntry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Salmon;
+            Controls.Add(label10);
+            Controls.Add(comboBox4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label9);
@@ -292,5 +315,7 @@
         private NumericUpDown numericUpDown3;
         private Button button2;
         private Button button3;
+        private ComboBox comboBox4;
+        private Label label10;
     }
 }

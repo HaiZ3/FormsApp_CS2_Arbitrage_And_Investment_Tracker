@@ -30,6 +30,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums
         Agent = 40,
 
         MusicKit = 50,
-        Graffiti = 51
+        Graffiti = 51,
+        Pin = 52
     }
 }

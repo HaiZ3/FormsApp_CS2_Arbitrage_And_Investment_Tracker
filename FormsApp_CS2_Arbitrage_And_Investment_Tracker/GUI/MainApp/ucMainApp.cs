@@ -33,6 +33,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
             Styler.StyleButton(button3, "Create a new Sheet");
             Styler.StyleButton(button4, "Close an entry");
             Styler.StyleButton(button5, "Currency Converter");
+
             Styler.StyleButton(button6, "Refresh entries sell order price(CsFloat)");
             Styler.StyleDataGridView(dataGridView1);
             BackColor = Color.FromArgb(37, 37, 38);
@@ -154,7 +155,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
 
             Entry[] openEntries = result.Data.Entries.Where(e => e.Status == Enums.EntryStatus.Open).ToArray();
 
-            ServiceResult refreshLowestSellOrderPriceResult = await _csFloatService.RefreshEntriesSellOrderPrices(openEntries);
+            ServiceResult refreshLowestSellOrderPriceResult = await _csFloatService.RefreshEntriesSellOrderPricesAsync(openEntries);
 
             if (!refreshLowestSellOrderPriceResult.Success)
             {

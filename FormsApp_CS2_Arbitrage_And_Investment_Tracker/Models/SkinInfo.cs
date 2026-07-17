@@ -9,7 +9,6 @@ using System.Text;
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
 {
 
-    //TODO make it possible to build the markethash name!!!
     [Table("SkinInfos")]
     public class SkinInfo
     {

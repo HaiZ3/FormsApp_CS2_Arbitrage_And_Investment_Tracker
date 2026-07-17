@@ -7,7 +7,6 @@ using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.DTOs;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using System.Globalization;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
@@ -24,24 +23,34 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
 
         public async Task<ServiceResult> AddEntryAsync(int sheetId, string entryName, int quantity
             , DateTime dateBought, DateTime? dateSold, decimal buyPrice, decimal? sellPrice, decimal? itemFloat
-            , SkinCondition? skinCondition, SkinVariant skinVariant)
+            , SkinCondition? skinCondition, SkinVariant skinVariant, ItemType? itemType)
         {
             SkinInfo skinInfo = new SkinInfo(entryName, itemFloat, skinVariant
                 , skinCondition);
 
-            skinInfo.SetItemType();
+            var cosmetics = new ItemType?[] { ItemType.Sticker, ItemType.Charm, ItemType.Patch };
+
+            if (!cosmetics.Contains(itemType))
+            {
+                skinInfo.SetItemType();
+            }
+            else
+            {
+                skinInfo.ItemType = itemType;
+            }
+
             skinInfo.SetMarketHashName();
 
             ServiceResultGeneric<decimal> sellOrderPriceResult = await _CSFloatService.GetLowestPriceListingAsync(skinInfo.MarketHashName);
 
             if (!sellOrderPriceResult.Success)
             {
-                ServiceResult.Fail("Failed to set the lowest sell order price");
+                return ServiceResult.Fail(sellOrderPriceResult.ErrorMessage);
             }
 
             decimal sellOrderPrice = sellOrderPriceResult.Data;
 
-            Entry entry = new Entry(quantity, dateBought, dateSold, buyPrice, sellPrice, sheetId, skinInfo,sellOrderPrice);
+            Entry entry = new Entry(quantity, dateBought, dateSold, buyPrice, sellPrice, sheetId, skinInfo, sellOrderPrice);
             entry.DataSource = EntryDataSource.Regular;
 
             _context.Add(entry);
@@ -81,7 +90,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
                 entry.Profit = entry.SellPrice - entry.BuyPrice;
                 entry.Return = ((entry.SellPrice - entry.BuyPrice) / entry.BuyPrice) * 100;
                 entry.DateSold = dateSold;
-                entry.HoldDays = (entry.DateBought - entry.DateSold).Value.Days;
+                entry.HoldDays = (entry.DateSold - entry.DateBought).Value.Days;
                 entry.DailyReturn = entry.Return / entry.HoldDays;
                 _context.Update(entry);
                 await _context.SaveChangesAsync();

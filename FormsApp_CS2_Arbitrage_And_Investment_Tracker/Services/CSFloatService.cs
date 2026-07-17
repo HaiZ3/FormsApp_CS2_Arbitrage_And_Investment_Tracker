@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.DTOs;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
-using System.Text.Json;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
+﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.DTOs;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
+using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
@@ -21,7 +17,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
         private readonly CS2TrackerContext _context;
         private readonly string _apiKey;
 
-        public CSFloatService(HttpClient httpClient, IConfiguration configuration,CS2TrackerContext context)
+        public CSFloatService(HttpClient httpClient, IConfiguration configuration, CS2TrackerContext context)
         {
             _httpClient = httpClient;
             _configuration = configuration;
@@ -39,17 +35,24 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services
             var response = await _httpClient.SendAsync(request);
             if (!response.IsSuccessStatusCode)
             {
-                return ServiceResultGeneric<decimal>.Fail("unsuccessful response") ;
+                return ServiceResultGeneric<decimal>.Fail("unsuccessful response");
             }
             var json = await response.Content.ReadAsStringAsync();
 
             CSFloatResponseDto data = JsonSerializer.Deserialize<CSFloatResponseDto>(json);
 
-            decimal priceUsd = data.Data[0].Price / 100m;
+            try
+            {
+                decimal priceUsd = data.Data[0].Price / 100m;
+                return ServiceResultGeneric<decimal>.Ok(priceUsd);
+            }
+            catch (Exception)
+            {
+                return ServiceResultGeneric<decimal>.Fail("Failed to get the lowest listing sell price try selecting the item type manually");
+            }
 
-            return ServiceResultGeneric<decimal>.Ok(priceUsd);
         }
-        public async Task<ServiceResult> RefreshEntriesSellOrderPrices(Entry[] entries)
+        public async Task<ServiceResult> RefreshEntriesSellOrderPricesAsync(Entry[] entries)
         {
             foreach (var entry in entries)
             {

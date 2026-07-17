@@ -11,7 +11,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices
     public interface ICSFloatService
     {
         public Task<ServiceResultGeneric<decimal>> GetLowestPriceListingAsync(string marketHashName);
-        public Task<ServiceResult> RefreshEntriesSellOrderPrices(Entry[] entries);
+        public Task<ServiceResult> RefreshEntriesSellOrderPricesAsync(Entry[] entries);
 
     }
 }

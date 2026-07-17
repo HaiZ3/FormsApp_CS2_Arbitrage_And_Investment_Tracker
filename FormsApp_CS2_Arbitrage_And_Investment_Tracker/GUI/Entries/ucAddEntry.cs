@@ -1,21 +1,10 @@
-﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Context;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
+﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Responses;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Session;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
 {
@@ -44,6 +33,13 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             comboBox1.ValueMember = "Value";
 
             comboBox2.DataSource = Enum.GetValues(typeof(SkinVariant));
+
+            var items = new List<string> { "None" };
+            items.AddRange(Enum.GetNames(typeof(ItemType)));
+            comboBox4.DataSource = items;
+
+            comboBox4.DisplayMember = "Name";  // if needed
+            comboBox4.SelectedIndex = 0;  // default to "None"
 
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm";
@@ -98,9 +94,18 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             int quantity = (int)numericUpDown1.Value;
             int sheetId = (int)comboBox3.SelectedValue;
             decimal buyPrice = numericUpDown3.Value;
+            ItemType? itemType = null;
+            if (comboBox4.SelectedIndex == 0)
+            {
+
+            }
+            else
+            {
+                itemType = (ItemType)Enum.Parse(typeof(ItemType), comboBox4.SelectedItem.ToString());
+            }
 
             var res = await _entryService.AddEntryAsync(sheetId, name, quantity
-                , buyTime, null, buyPrice, null, itemFloat, skinCondition, skinVariant);
+                , buyTime, null, buyPrice, null, itemFloat, skinCondition, skinVariant, itemType);
 
             if (res.Success == false)
             {
@@ -135,6 +140,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             {
                 MessageBox.Show($"Successfully imported {res.Data[1]} entries from CSV. Failed entries: {res.Data[0]}");
             }
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -9,7 +9,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles
         public static void StyleButton(Button btn, string text)
         {
             btn.Text = text;
-            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatStyle = FlatStyle.Standard;
+            btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.BackColor = Color.FromArgb(45, 45, 45);
             btn.ForeColor = Color.White;
             btn.Font = new Font("Segoe UI", 10, FontStyle.Regular);

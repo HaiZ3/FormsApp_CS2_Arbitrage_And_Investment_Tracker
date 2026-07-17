@@ -1,8 +1,5 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
 {
@@ -11,9 +8,22 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
         public static string GetMarketHashName(SkinInfo skinInfo)
         {
             string marketHashName = string.Empty;
-            if(skinInfo.ItemType == ItemType.MusicKit) 
+            if (skinInfo.ItemType == ItemType.Sticker)
             {
-                if(skinInfo.SkinVariant == SkinVariant.Normal)
+                return marketHashName = $"Sticker | {skinInfo.Name.Trim()}";
+            }
+            if(skinInfo.ItemType == ItemType.Patch)
+            {
+                return marketHashName = $"Patch | {skinInfo.Name.Trim()}";
+            }
+            if(skinInfo.ItemType == ItemType.Charm)
+            {
+                return marketHashName = $"Charm | {skinInfo.Name.Trim()}";
+            }
+
+            if (skinInfo.ItemType == ItemType.MusicKit)
+            {
+                if (skinInfo.SkinVariant == SkinVariant.Normal)
                 {
                     marketHashName = skinInfo.Name.Trim();
                 }
@@ -55,31 +65,32 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
             }
             if (skinInfo.Name.StartsWith("★"))
             {
-                if(skinInfo.SkinVariant == SkinVariant.Normal)
+                if (skinInfo.SkinVariant == SkinVariant.Normal)
                 {
                     marketHashName = $"{skinInfo.Name.Trim()} ({skinVariant})";
                 }
                 else
                 {
-                    string temp = skinInfo.Name.Remove(0,1).Trim();
+                    string temp = skinInfo.Name.Remove(0, 1).Trim();
                     marketHashName = $"★ {skinInfo.SkinVariant}™ {temp.Trim()} ({skinVariant})";
                 }
             }
             else
             {
-                if(skinInfo.SkinVariant == SkinVariant.Normal)
+                if (skinInfo.SkinVariant == SkinVariant.Normal)
                 {
                     marketHashName = $"{skinInfo.Name.Trim()} ({skinVariant})";
                 }
-                else if(skinInfo.SkinVariant == SkinVariant.StatTrak)
+                else if (skinInfo.SkinVariant == SkinVariant.StatTrak)
                 {
                     marketHashName = $"StatTrak™ {skinInfo.Name.Trim()} ({skinVariant})";
                 }
-                else if(skinInfo.SkinVariant == SkinVariant.Souvenir)
+                else if (skinInfo.SkinVariant == SkinVariant.Souvenir)
                 {
                     marketHashName = $"Souvenir {skinInfo.Name.Trim()} ({skinVariant})";
                 }
             }
+
             return marketHashName;
         }
     }
