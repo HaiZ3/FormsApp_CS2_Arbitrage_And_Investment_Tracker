@@ -40,7 +40,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(340, 152);
+            textBox1.Location = new Point(436, 166);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(178, 23);
             textBox1.TabIndex = 1;
@@ -49,7 +49,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(396, 124);
+            label1.Location = new Point(495, 138);
             label1.Name = "label1";
             label1.Size = new Size(60, 15);
             label1.TabIndex = 3;
@@ -59,7 +59,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(405, 198);
+            label2.Location = new Point(507, 212);
             label2.Name = "label2";
             label2.Size = new Size(36, 15);
             label2.TabIndex = 4;
@@ -67,14 +67,14 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(340, 216);
+            textBox2.Location = new Point(436, 230);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(178, 23);
             textBox2.TabIndex = 5;
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(340, 273);
+            textBox3.Location = new Point(436, 287);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(178, 23);
             textBox3.TabIndex = 6;
@@ -83,7 +83,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(396, 255);
+            label3.Location = new Point(497, 269);
             label3.Name = "label3";
             label3.Size = new Size(57, 15);
             label3.TabIndex = 7;
@@ -91,7 +91,7 @@
             // 
             // createAccountBtn
             // 
-            createAccountBtn.Location = new Point(340, 318);
+            createAccountBtn.Location = new Point(436, 332);
             createAccountBtn.Name = "createAccountBtn";
             createAccountBtn.Size = new Size(178, 49);
             createAccountBtn.TabIndex = 8;
@@ -101,7 +101,7 @@
             // 
             // loginBtn
             // 
-            loginBtn.Location = new Point(340, 400);
+            loginBtn.Location = new Point(436, 414);
             loginBtn.Name = "loginBtn";
             loginBtn.Size = new Size(178, 49);
             loginBtn.TabIndex = 9;

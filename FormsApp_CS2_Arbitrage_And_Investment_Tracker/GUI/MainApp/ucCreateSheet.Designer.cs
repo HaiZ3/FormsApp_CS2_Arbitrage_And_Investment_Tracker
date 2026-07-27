@@ -39,21 +39,21 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(331, 253);
+            comboBox1.Location = new Point(430, 262);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(190, 23);
             comboBox1.TabIndex = 6;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(331, 190);
+            textBox1.Location = new Point(430, 199);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(190, 23);
             textBox1.TabIndex = 7;
             // 
             // button1
             // 
-            button1.Location = new Point(331, 293);
+            button1.Location = new Point(430, 302);
             button1.Name = "button1";
             button1.Size = new Size(190, 51);
             button1.TabIndex = 8;
@@ -65,7 +65,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(389, 235);
+            label1.Location = new Point(488, 244);
             label1.Name = "label1";
             label1.Size = new Size(63, 15);
             label1.TabIndex = 9;
@@ -75,7 +75,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(389, 172);
+            label2.Location = new Point(488, 181);
             label2.Name = "label2";
             label2.Size = new Size(71, 15);
             label2.TabIndex = 10;
@@ -83,7 +83,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(331, 359);
+            button2.Location = new Point(430, 368);
             button2.Name = "button2";
             button2.Size = new Size(190, 51);
             button2.TabIndex = 11;

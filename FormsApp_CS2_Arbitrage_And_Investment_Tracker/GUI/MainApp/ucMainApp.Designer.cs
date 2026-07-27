@@ -45,7 +45,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13F);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(471, 10);
+            label1.Location = new Point(466, 14);
             label1.Name = "label1";
             label1.Size = new Size(90, 25);
             label1.TabIndex = 0;
@@ -53,7 +53,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(255, 520);
+            button2.Location = new Point(250, 524);
             button2.Name = "button2";
             button2.Size = new Size(190, 63);
             button2.TabIndex = 2;
@@ -63,7 +63,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(28, 520);
+            button3.Location = new Point(23, 524);
             button3.Name = "button3";
             button3.Size = new Size(190, 63);
             button3.TabIndex = 3;
@@ -74,15 +74,15 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(27, 38);
+            dataGridView1.Location = new Point(22, 42);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(994, 384);
+            dataGridView1.Size = new Size(1000, 400);
             dataGridView1.TabIndex = 4;
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(255, 491);
+            comboBox1.Location = new Point(250, 495);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(190, 23);
             comboBox1.TabIndex = 5;
@@ -90,7 +90,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(472, 520);
+            button1.Location = new Point(467, 524);
             button1.Name = "button1";
             button1.Size = new Size(170, 63);
             button1.TabIndex = 6;
@@ -101,7 +101,7 @@
             // button4
             // 
             button4.ForeColor = SystemColors.ControlText;
-            button4.Location = new Point(665, 520);
+            button4.Location = new Point(660, 524);
             button4.Name = "button4";
             button4.Size = new Size(170, 63);
             button4.TabIndex = 7;
@@ -111,7 +111,7 @@
             // 
             // button5
             // 
-            button5.Location = new Point(863, 520);
+            button5.Location = new Point(858, 524);
             button5.Name = "button5";
             button5.Size = new Size(170, 63);
             button5.TabIndex = 8;
@@ -121,7 +121,7 @@
             // 
             // button6
             // 
-            button6.Location = new Point(472, 437);
+            button6.Location = new Point(467, 448);
             button6.Name = "button6";
             button6.Size = new Size(263, 64);
             button6.TabIndex = 9;

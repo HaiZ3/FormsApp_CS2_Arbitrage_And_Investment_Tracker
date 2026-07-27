@@ -64,5 +64,10 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.UserConrols
         {
 
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
