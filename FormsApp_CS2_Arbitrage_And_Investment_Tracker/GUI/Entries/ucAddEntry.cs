@@ -115,6 +115,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             {
                 MessageBox.Show("Entry added successfully!");
             }
+
+            textBox1.Text = "";
+            numericUpDown3.Value = 0.00m;
+            numericUpDown2.Value = 0.00m;
+
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)

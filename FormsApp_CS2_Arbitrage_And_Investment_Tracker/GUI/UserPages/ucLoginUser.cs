@@ -2,7 +2,7 @@
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.AppStyles;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Interfaces.IServices;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Helpers;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Services;
 using System;
 using System.Collections.Generic;

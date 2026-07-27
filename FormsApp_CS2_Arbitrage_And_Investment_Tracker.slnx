@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="FormsApp_CS2_Arbitrage_And_Investment_Tracker/FormsApp_CS2_Arbitrage_And_Investment_Tracker.csproj" />
+  <Project Path="FormsApp_CS2_Arbitrage_And_Investment_Tracker_Test/FormsApp_CS2_Arbitrage_And_Investment_Tracker_Test.csproj" Id="f3781457-4c9d-4273-b4d1-0173af2aa78e" />
 </Solution>

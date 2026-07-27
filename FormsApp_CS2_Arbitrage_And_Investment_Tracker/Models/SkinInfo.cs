@@ -1,5 +1,5 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
-using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers;
+using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -51,7 +51,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes
         }
         public void SetMarketHashName()
         {
-            MarketHashName = Cs2MarketHashNameHelper.GetMarketHashName(this);
+            MarketHashName = Cs2MarketHashNameHelper.BuildMarketHashName(this);
         }
     }
 }

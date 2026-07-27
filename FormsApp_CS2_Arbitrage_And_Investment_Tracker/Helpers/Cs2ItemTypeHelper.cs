@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
+namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Helpers
 {
     public static class Cs2ItemTypeHelper
     {
@@ -62,7 +62,7 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
                 return baseName switch
                 {
                     "Glock-18" or "USP-S" or "P2000" or "P250" or "Five-SeveN" or
-                    "Tec-9" or "CZ75-Auto" or "Desert Eagle" or "R8 Revolver"
+                    "Tec-9" or "CZ75-Auto" or "Desert Eagle" or "R8 Revolver" or "Zeus x27"
                         => ItemType.Pistol,
 
                     "AK-47" or "M4A4" or "M4A1-S" or "FAMAS" or "Galil AR" or "AUG" or "SG 553"
@@ -79,8 +79,6 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
 
                     "M249" or "Negev"
                         => ItemType.MachineGun,
-
-                    _ => ItemType.Unknown
                 };
             }
 

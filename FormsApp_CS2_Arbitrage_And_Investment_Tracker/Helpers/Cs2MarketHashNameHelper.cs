@@ -1,11 +1,11 @@
 ﻿using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Classes;
 using FormsApp_CS2_Arbitrage_And_Investment_Tracker.Enums;
 
-namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
+namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Helpers
 {
     public static class Cs2MarketHashNameHelper
     {
-        public static string GetMarketHashName(SkinInfo skinInfo)
+        public static string BuildMarketHashName(SkinInfo skinInfo)
         {
             string marketHashName = string.Empty;
             if (skinInfo.ItemType == ItemType.Sticker)
@@ -25,11 +25,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
             {
                 if (skinInfo.SkinVariant == SkinVariant.Normal)
                 {
-                    marketHashName = skinInfo.Name.Trim();
+                    marketHashName = $"Music Kit | {skinInfo.Name.Trim()}";
                 }
                 else
                 {
-                    marketHashName = $"StatTrak™ {skinInfo.Name.Trim()}";
+                    marketHashName = $"StatTrak™ Music Kit | {skinInfo.Name.Trim()}";
                 }
                 return marketHashName;
             }
@@ -54,14 +54,11 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
                 case SkinCondition.Vanilla:
                     marketHashName = skinInfo.Name;
                     return marketHashName;
-                    break;
                 case null:
                     marketHashName = skinInfo.Name;
                     return marketHashName;
-                    break;
                 default:
                     return skinInfo.Name;
-                    break;
             }
             if (skinInfo.Name.StartsWith("★"))
             {

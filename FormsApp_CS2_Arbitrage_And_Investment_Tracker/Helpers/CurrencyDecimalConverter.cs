@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Models.Helpers
+namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.Helpers
 {
     public class CurrencyDecimalConverter : DecimalConverter
     {
