@@ -17,4 +17,4 @@ Although the project is still under active development, it already includes a fu
 - 💵 Currency converter **(ExchangeRate-API)**
 
 ## Screenshots
-![Main Window](TrackerPreview.png.png)
+<img width="1048" height="600" alt="TrackerPreview" src="https://github.com/user-attachments/assets/b4c0c42e-81ac-4202-a159-61e2e5f72f66" />
