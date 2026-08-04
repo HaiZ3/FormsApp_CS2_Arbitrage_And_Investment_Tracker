@@ -82,7 +82,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.Entries
             {
                 MessageBox.Show(res.ErrorMessage);
             }
-            dataGridView1.DataSource = res.Data.Where(x => x.Status == EntryStatus.Open).Select(e => new EntryDisplayDto
+            dataGridView1.DataSource = res
+                .Data
+                .Where(x => x.Status == EntryStatus.Open)
+                .OrderBy(x => x.Status)
+                .ThenByDescending(x => x.BuyPrice)
+                .Select(e => new EntryDisplayDto
             {
                 Id = e.Id,
                 Name = e.Name,

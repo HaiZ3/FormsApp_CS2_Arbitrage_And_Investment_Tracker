@@ -84,7 +84,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
                 return;
             }
 
-            EntryDisplayDto[] dgvSource = result.Data.Entries.Select(e => new EntryDisplayDto
+            EntryDisplayDto[] dgvSource = result
+                .Data
+                .Entries
+                .OrderBy(x => x.Status)
+                .ThenByDescending(x => x.BuyPrice)
+                .Select(e => new EntryDisplayDto
             {
                 Id = e.Id,
                 Name = e.Name,
@@ -97,7 +102,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
                 Profit = $"{e.Profit:f2}$",
                 ReturnPercent = $"{e.Return:f2}%",
                 LowestSellOrder = $"{e.SellOrderPice:f2}$",
-            }).OrderBy(x => x.Status).ToArray();
+            })
+            .ToArray();
 
             dataGridView1.DataSource = dgvSource;
         }
@@ -163,7 +169,12 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
                 return;
             }
 
-            EntryDisplayDto[] dgvSource = result.Data.Entries.Select(e => new EntryDisplayDto
+            EntryDisplayDto[] dgvSource = result
+                .Data
+                .Entries
+                .OrderBy(x => x.Status)
+                .ThenByDescending(x => x.BuyPrice)
+                .Select(e => new EntryDisplayDto
             {
                 Id = e.Id,
                 Name = e.Name,
@@ -176,7 +187,8 @@ namespace FormsApp_CS2_Arbitrage_And_Investment_Tracker.GUI.MainApp
                 Profit = $"{e.Profit:f2}$",
                 ReturnPercent = $"{e.Return:f2}%",
                 LowestSellOrder = $"{e.SellOrderPice:f2}$",
-            }).OrderBy(x => x.Status).ToArray();
+            })
+            .ToArray();
 
             dataGridView1.DataSource = dgvSource;
 
